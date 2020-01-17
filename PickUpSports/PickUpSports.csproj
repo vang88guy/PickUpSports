@@ -168,14 +168,20 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\usersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202001171451512_initial migration.cs" />
     <Compile Include="Migrations\202001171451512_initial migration.Designer.cs">
       <DependentUpon>202001171451512_initial migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001171550492_added phone number.cs" />
+    <Compile Include="Migrations\202001171550492_added phone number.Designer.cs">
+      <DependentUpon>202001171550492_added phone number.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -243,9 +249,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Event\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -263,6 +271,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202001171451512_initial migration.resx">
       <DependentUpon>202001171451512_initial migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001171550492_added phone number.resx">
+      <DependentUpon>202001171550492_added phone number.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
