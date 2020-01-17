@@ -170,12 +170,21 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202001171416347_InitalMigration.cs" />
     <Compile Include="Migrations\202001171416347_InitalMigration.Designer.cs">
       <DependentUpon>202001171416347_InitalMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001171550523_AddedPhoneNumberToPlayerModel.cs" />
+    <Compile Include="Migrations\202001171550523_AddedPhoneNumberToPlayerModel.Designer.cs">
+      <DependentUpon>202001171550523_AddedPhoneNumberToPlayerModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001171551473_FixedPhoneNumberName.cs" />
+    <Compile Include="Migrations\202001171551473_FixedPhoneNumberName.Designer.cs">
+      <DependentUpon>202001171551473_FixedPhoneNumberName.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -242,6 +251,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -262,6 +272,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202001171416347_InitalMigration.resx">
       <DependentUpon>202001171416347_InitalMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001171550523_AddedPhoneNumberToPlayerModel.resx">
+      <DependentUpon>202001171550523_AddedPhoneNumberToPlayerModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001171551473_FixedPhoneNumberName.resx">
+      <DependentUpon>202001171551473_FixedPhoneNumberName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

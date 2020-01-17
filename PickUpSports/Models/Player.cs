@@ -17,6 +17,8 @@ namespace PickUpSports.Models
         public string LastName { get; set; }
         [Display(Name = "Zip Code")]
         public int ZipCode { get; set; }
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
         [Display(Name = "Play Level")]
         public int PlayLevel { get; set; }
         [Display(Name = "Player Rating")]
