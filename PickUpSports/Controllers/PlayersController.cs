@@ -1,6 +1,8 @@
-﻿using PickUpSports.Models;
+﻿using Microsoft.AspNet.Identity;
+using PickUpSports.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,31 +16,36 @@ namespace PickUpSports.Controllers
         // GET: Players
         public ActionResult Index()
         {
-            
-            return View();
+            var players = db.Players.Include(p=>p.ApplicationUser).ToList();
+            return View(players);
         }
 
         // GET: Players/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var player = db.Players.Include(p => p.ApplicationUser).FirstOrDefault(p=>p.Id == id);
+            return View(player);
         }
 
         // GET: Players/Create
         public ActionResult Create()
         {
-            return View();
+            Player player = new Player();
+            return View(player);
         }
 
         // POST: Players/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Player player)
         {
             try
             {
                 // TODO: Add insert logic here
+                player.ApplicationId = User.Identity.GetUserId();
+                db.Players.Add(player);
+                db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("LogOut", "Account");
             }
             catch
             {
