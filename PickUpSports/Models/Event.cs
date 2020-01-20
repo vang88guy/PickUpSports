@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,7 +10,7 @@ namespace PickUpSports.Models
     public class Event
     {
         [Key]
-        public int Id { get; set; }
+        public int EventId { get; set; }
         [Display(Name = "Event Name")]
         public string EventName { get; set; }
         [Display(Name = "Sport")]
@@ -25,9 +25,12 @@ namespace PickUpSports.Models
         public int ZipCode { get; set; }
         [Display(Name = "Event Is Full")]
         public bool IsFull { get; set; }
-        [ForeignKey("ApplicationUser")]
-        public string ApplicationId { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
+       
+        [ForeignKey("Player")]
+        public int PlayerId { get; set; }
+        public Player Player { get; set; }
+        
 
     }
+
 }

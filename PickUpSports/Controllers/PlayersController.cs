@@ -16,14 +16,14 @@ namespace PickUpSports.Controllers
         // GET: Players
         public ActionResult Index()
         {
-            var players = db.Players.Include(p=>p.ApplicationUser).ToList();
+            var players = db.Players.Include(p => p.ApplicationUser).ToList();
             return View(players);
         }
 
         // GET: Players/Details/5
         public ActionResult Details(int id)
         {
-            var player = db.Players.Include(p => p.ApplicationUser).FirstOrDefault(p=>p.Id == id);
+            var player = db.Players.Include(p => p.ApplicationUser).FirstOrDefault(p => p.Id == id);
             return View(player);
         }
 
@@ -41,7 +41,9 @@ namespace PickUpSports.Controllers
             try
             {
                 // TODO: Add insert logic here
+
                 player.ApplicationId = User.Identity.GetUserId();
+
                 db.Players.Add(player);
                 db.SaveChanges();
 
@@ -56,17 +58,26 @@ namespace PickUpSports.Controllers
         // GET: Players/Edit/5
         public ActionResult Edit(int id)
         {
+            var player = db.Players.Include(p => p.ApplicationUser).Where(p => p.Id == id).FirstOrDefault();
             return View();
         }
 
         // POST: Players/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Player player)
         {
             try
             {
                 // TODO: Add update logic here
-
+                var playeredit = db.Players.Where(p => p.Id == id).FirstOrDefault();
+                playeredit.FirstName = player.FirstName;
+                playeredit.LastName = player.LastName;
+                playeredit.PhoneNumber = player.PhoneNumber;
+                playeredit.SkillLevel = player.SkillLevel;
+                playeredit.SportsInterest = player.SportsInterest;
+                playeredit.ApplicationUser.UserName = player.ApplicationUser.UserName;
+                playeredit.ApplicationUser.Email = player.ApplicationUser.Email;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
