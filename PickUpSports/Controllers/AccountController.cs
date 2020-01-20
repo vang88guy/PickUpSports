@@ -19,6 +19,7 @@ namespace PickUpSports.Controllers
         private ApplicationUserManager _userManager;
 
         ApplicationDbContext context;
+
         public AccountController()
         {
             context = new ApplicationDbContext();
@@ -78,19 +79,23 @@ namespace PickUpSports.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:                                      
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
+            var user = await UserManager.FindAsync(model.UserName, model.Password);
+                    var roles = await UserManager.GetRolesAsync(user.Id);
+                    if (roles.Contains("Admin"))
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else if (roles.Contains("Player"))
+                    {
+                        return RedirectToAction("Index", "Player");
+                    }
+                    else
+                    {
+                        return RedirectToLocal(returnUrl);
+                    }
+
+              
+            
         }
 
         //
@@ -138,13 +143,16 @@ namespace PickUpSports.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+            [AllowAnonymous]
         public ActionResult Register()
         {
             //ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
             //                        .ToList(), "Name", "Name");
+
             return View();
-        }
+        }    
+            
+    
 
         //
         // POST: /Account/Register
@@ -166,6 +174,7 @@ namespace PickUpSports.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
                     //Assign Role to user Here   
                     model.UserRoles = "Player";
                     await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
@@ -177,9 +186,9 @@ namespace PickUpSports.Controllers
                 
                 AddErrors(result);
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
+            // If we got this far, something failed, redisplay form
+            
         }
 
         //

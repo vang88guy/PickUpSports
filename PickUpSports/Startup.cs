@@ -14,7 +14,8 @@ namespace PickUpSports
             ConfigureAuth(app);
             createRolesandUsers();
         }
-        // In this method we will create default User roles and Admin user for login    
+
+   
         private void createRolesandUsers()
         {
             ApplicationDbContext context = new ApplicationDbContext();
@@ -35,10 +36,11 @@ namespace PickUpSports
                 //Here we create a Admin super user who will maintain the website                   
 
                 var user = new ApplicationUser();
-                user.UserName = "cwvang";
-                user.Email = "chong_1988@hotmail.com";
+                user.UserName = "AQua";
+                user.Email = "aquasius92@gmail.com";
 
-                string userPWD = "123456";
+                string userPWD = "Qwak9214";
+
 
                 var chkUser = UserManager.Create(user, userPWD);
 
@@ -50,7 +52,10 @@ namespace PickUpSports
                 }
             }
 
-            // creating Creating Employee role     
+           
+
+            // creating Creating Player role     
+
             if (!roleManager.RoleExists("Player"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
@@ -58,14 +63,6 @@ namespace PickUpSports
                 roleManager.Create(role);
 
             }
-            //// creating Creating Customer role     
-            //if (!roleManager.RoleExists("Customer"))
-            //{
-            //    var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-            //    role.Name = "Customer";
-            //    roleManager.Create(role);
-
-            //}
         }
     }
 }

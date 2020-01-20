@@ -24,6 +24,8 @@ namespace PickUpSports.Models
         public bool RememberMe { get; set; }
     }
 
+
+
     public class VerifyCodeViewModel
     {
         [Required]
@@ -50,8 +52,7 @@ namespace PickUpSports.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "UserName")]
-
+        [Display(Name = "User Name")]
         public string UserName { get; set; }
 
         [Required]
@@ -79,6 +80,14 @@ namespace PickUpSports.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
        
+
+        [Required]
+        [Display(Name = "UserRoles")]
+        public string UserRoles { get; set; }
+
+        [Required]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
