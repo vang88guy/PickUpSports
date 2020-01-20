@@ -1,0 +1,43 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Configuration;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+using Twilio.Types;
+using Twilio.TwiML;
+using Twilio.AspNet.Mvc;
+
+namespace PickUpSports.Controllers
+{
+    public class SMSController : TwilioController
+    {
+        public ActionResult SendSMS()
+        {
+            var accountSid = "AC9ecebad9ebc67e6a785dc87315e04b14";
+            var authToken = "9055654fc2420ae412e35bb5cabfbd22";
+            TwilioClient.Init(accountSid, authToken);
+
+            var to = new PhoneNumber("+19202542672");
+            var from = new PhoneNumber("+12562420890");
+
+            var message = MessageResource.Create(
+                to: to,
+                from: from,
+                body: "An event in your interest has been created. Open the app to view the event.");
+            return Content(message.Sid);
+        }
+    
+    
+        public ActionResult ReceiveSMS()
+        {
+            var response = new MessagingResponse();
+            response.Message("");
+            return TwiML(response);
+        }
+    
+    }
+
+}
