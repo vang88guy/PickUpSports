@@ -16,7 +16,7 @@ namespace PickUpSports.Controllers
         // GET: Players
         public ActionResult Index()
         {
-            var players = db.Players.Include(p => p.ApplicationUser).ToList();
+            var players = db.Player.Include(p => p.ApplicationUser).ToList();
             return View(players);
         }
 
@@ -24,7 +24,7 @@ namespace PickUpSports.Controllers
         public ActionResult Details()
         {
             var userid = User.Identity.GetUserId();
-            var player = db.Players.Include(p => p.ApplicationUser).FirstOrDefault(p => p.ApplicationId == userid);
+            var player = db.Player.Include(p => p.ApplicationUser).FirstOrDefault(p => p.ApplicationId == userid);
             return View(player);
         }
 
@@ -32,6 +32,8 @@ namespace PickUpSports.Controllers
         public ActionResult Create()
         {
             Player player = new Player();
+            var sports = db.Sport.Select(s=>s.SportName).ToList();
+            ViewBag.Sports = new SelectList(sports);
             return View(player);
         }
 
@@ -45,7 +47,7 @@ namespace PickUpSports.Controllers
 
                 player.ApplicationId = User.Identity.GetUserId();
 
-                db.Players.Add(player);
+                db.Player.Add(player);
                 db.SaveChanges();
 
                 return RedirectToAction("LogOut", "Account");
@@ -59,7 +61,7 @@ namespace PickUpSports.Controllers
         // GET: Players/Edit/5
         public ActionResult Edit(int id)
         {
-            var player = db.Players.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
+            var player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
             return View(player);
         }
 
@@ -70,7 +72,7 @@ namespace PickUpSports.Controllers
             try
             {
                 // TODO: Add update logic here
-                var playeredit = db.Players.Where(p => p.PlayerId == id).FirstOrDefault();
+                var playeredit = db.Player.Where(p => p.PlayerId == id).FirstOrDefault();
                 playeredit.FirstName = player.FirstName;
                 playeredit.LastName = player.LastName;
                 playeredit.PhoneNumber = player.PhoneNumber;
@@ -90,7 +92,8 @@ namespace PickUpSports.Controllers
         // GET: Players/Delete/5
         public ActionResult Delete(int id)
         {
-            var player = db.Players.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
+            var player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
+            
             return View(player);
         }
 
@@ -101,10 +104,10 @@ namespace PickUpSports.Controllers
             try
             {
                 // TODO: Add delete logic here
-                player = db.Players.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();               
+                player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();               
                 var userdelete = db.Users.SingleOrDefault(c => c.Id == player.ApplicationId);
                 player.ApplicationId = null;
-                db.Players.Remove(player);
+                db.Player.Remove(player);
                 db.Users.Remove(userdelete);
                 db.SaveChanges();
                 return RedirectToAction("Index");

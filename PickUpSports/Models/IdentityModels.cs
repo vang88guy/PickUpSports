@@ -21,9 +21,9 @@ namespace PickUpSports.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
 
-        public DbSet<Player> Players { get; set; }
-        public DbSet<Event> Events { get; set; }
-        public object Player { get; internal set; }
+        public DbSet<Player> Player { get; set; }
+        public DbSet<Event> Event { get; set; }
+        public DbSet<Sport> Sport { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
