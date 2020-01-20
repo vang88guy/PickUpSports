@@ -190,7 +190,7 @@
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-<<<<<<< HEAD
+
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\SMSController.cs" />
     <Compile Include="Controllers\usersController.cs" />
@@ -204,7 +204,7 @@
     <Compile Include="Migrations\202001171550492_added phone number.cs" />
     <Compile Include="Migrations\202001171550492_added phone number.Designer.cs">
       <DependentUpon>202001171550492_added phone number.cs</DependentUpon>
-=======
+<!--
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -216,20 +216,20 @@
     <Compile Include="Migrations\202001171556361_PhoneNumber.cs" />
     <Compile Include="Migrations\202001171556361_PhoneNumber.Designer.cs">
       <DependentUpon>202001171556361_PhoneNumber.cs</DependentUpon>
->>>>>>> d8211a3a1de5669722d0ff202d7bfd88d673435d
+-->
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-<<<<<<< HEAD
+
     <Compile Include="Models\Parks.cs" />
     <Compile Include="Models\Player.cs" />
-=======
+<!--
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\PlayerCreateViewModel.cs" />
->>>>>>> d8211a3a1de5669722d0ff202d7bfd88d673435d
+-->
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -289,12 +289,12 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-<<<<<<< HEAD
+<!--
     <Content Include="Views\users\Index.cshtml" />
-=======
+-->
     <Content Include="Views\Players\Create.cshtml" />
     <Content Include="Views\Players\Index.cshtml" />
->>>>>>> d8211a3a1de5669722d0ff202d7bfd88d673435d
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -316,20 +316,21 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
+
     <EmbeddedResource Include="Migrations\202001171451512_initial migration.resx">
       <DependentUpon>202001171451512_initial migration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001171550492_added phone number.resx">
-      <DependentUpon>202001171550492_added phone number.cs</DependentUpon>
-=======
+  <EmbeddedResource Include="Migrations\202001171550492_added phone number.resx">
+    <DependentUpon>202001171550492_added phone number.cs</DependentUpon>
+  </EmbeddedResource>
+<!--
     <EmbeddedResource Include="Migrations\202001171415504_Initial.resx">
       <DependentUpon>202001171415504_Initial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001171556361_PhoneNumber.resx">
       <DependentUpon>202001171556361_PhoneNumber.cs</DependentUpon>
->>>>>>> d8211a3a1de5669722d0ff202d7bfd88d673435d
     </EmbeddedResource>
+    -->
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -9,6 +9,7 @@ using Twilio.Rest.Api.V2010.Account;
 using Twilio.Types;
 using Twilio.TwiML;
 using Twilio.AspNet.Mvc;
+using static PickUpSports.Models.TwilioAPIKey;
 
 namespace PickUpSports.Controllers
 {
@@ -16,8 +17,8 @@ namespace PickUpSports.Controllers
     {
         public ActionResult SendSMS()
         {
-            var accountSid = "AC9ecebad9ebc67e6a785dc87315e04b14";
-            var authToken = "9055654fc2420ae412e35bb5cabfbd22";
+            var accountSid = TwilioAcct;
+            var authToken = TwilioToken;
             TwilioClient.Init(accountSid, authToken);
 
             var to = new PhoneNumber("+19202542672");
