@@ -26,7 +26,8 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @if (User.IsInRole("Player") == true)
                     {
-                <li>@Html.ActionLink("players", "Index", "Players")</li>
+                    <li>@Html.ActionLink("Player Details", "Details", "Players")</li>
+                    <li>@Html.ActionLink("Create Event", "Create", "Event")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

@@ -48,22 +48,21 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PlayLevel, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SkillLevel, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PlayLevel, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PlayLevel, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.SkillLevel, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SkillLevel, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PlayerRating, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SportsInterest, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PlayerRating, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PlayerRating, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.SportsInterest, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SportsInterest, "", new { @class = "text-danger" })
             </div>
         </div>
 
-       
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

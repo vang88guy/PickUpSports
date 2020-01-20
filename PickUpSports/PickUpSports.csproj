@@ -187,45 +187,23 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-
-    <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Controllers\SMSController.cs" />
     <Compile Include="Controllers\usersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001171451512_initial migration.cs" />
-    <Compile Include="Migrations\202001171451512_initial migration.Designer.cs">
-      <DependentUpon>202001171451512_initial migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001171550492_added phone number.cs" />
-    <Compile Include="Migrations\202001171550492_added phone number.Designer.cs">
-      <DependentUpon>202001171550492_added phone number.cs</DependentUpon>
-<!--
-    <Compile Include="Controllers\PlayersController.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001171415504_Initial.cs" />
-    <Compile Include="Migrations\202001171415504_Initial.Designer.cs">
-      <DependentUpon>202001171415504_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001171556361_PhoneNumber.cs" />
-    <Compile Include="Migrations\202001171556361_PhoneNumber.Designer.cs">
-      <DependentUpon>202001171556361_PhoneNumber.cs</DependentUpon>
--->
-    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-
     <Compile Include="Models\Parks.cs" />
     <Compile Include="Models\Player.cs" />
-<!--
+    <Compile Include="Models\TwilioAPIKey.cs" />
+    <!--
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\PlayerCreateViewModel.cs" />
 -->
@@ -288,17 +266,18 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-<!--
+    <!--
     <Content Include="Views\users\Index.cshtml" />
 -->
-    <Content Include="Views\Players\Create.cshtml" />
     <Content Include="Views\Players\Index.cshtml" />
-
+    <Content Include="Views\Players\Create.cshtml" />
+    <Content Include="Views\Players\Edit.cshtml" />
+    <Content Include="Views\Players\Delete.cshtml" />
+    <Content Include="Views\Players\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Event\" />
-    <Folder Include="Views\Player\" />
     <Folder Include="Views\SMS\" />
   </ItemGroup>
   <ItemGroup>
@@ -313,23 +292,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-
-    <EmbeddedResource Include="Migrations\202001171451512_initial migration.resx">
-      <DependentUpon>202001171451512_initial migration.cs</DependentUpon>
-    </EmbeddedResource>
-  <EmbeddedResource Include="Migrations\202001171550492_added phone number.resx">
-    <DependentUpon>202001171550492_added phone number.cs</DependentUpon>
-  </EmbeddedResource>
-<!--
-    <EmbeddedResource Include="Migrations\202001171415504_Initial.resx">
-      <DependentUpon>202001171415504_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001171556361_PhoneNumber.resx">
-      <DependentUpon>202001171556361_PhoneNumber.cs</DependentUpon>
-    </EmbeddedResource>
-    -->
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

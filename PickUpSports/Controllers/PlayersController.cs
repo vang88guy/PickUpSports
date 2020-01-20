@@ -21,9 +21,10 @@ namespace PickUpSports.Controllers
         }
 
         // GET: Players/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details()
         {
-            var player = db.Players.Include(p => p.ApplicationUser).FirstOrDefault(p => p.Id == id);
+            var userid = User.Identity.GetUserId();
+            var player = db.Players.Include(p => p.ApplicationUser).FirstOrDefault(p => p.ApplicationId == userid);
             return View(player);
         }
 
@@ -58,8 +59,8 @@ namespace PickUpSports.Controllers
         // GET: Players/Edit/5
         public ActionResult Edit(int id)
         {
-            var player = db.Players.Include(p => p.ApplicationUser).Where(p => p.Id == id).FirstOrDefault();
-            return View();
+            var player = db.Players.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
+            return View(player);
         }
 
         // POST: Players/Edit/5
@@ -69,7 +70,7 @@ namespace PickUpSports.Controllers
             try
             {
                 // TODO: Add update logic here
-                var playeredit = db.Players.Where(p => p.Id == id).FirstOrDefault();
+                var playeredit = db.Players.Where(p => p.PlayerId == id).FirstOrDefault();
                 playeredit.FirstName = player.FirstName;
                 playeredit.LastName = player.LastName;
                 playeredit.PhoneNumber = player.PhoneNumber;
@@ -89,17 +90,23 @@ namespace PickUpSports.Controllers
         // GET: Players/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var player = db.Players.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
+            return View(player);
         }
 
         // POST: Players/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Player player)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                player = db.Players.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();               
+                var userdelete = db.Users.SingleOrDefault(c => c.Id == player.ApplicationId);
+                player.ApplicationId = null;
+                db.Players.Remove(player);
+                db.Users.Remove(userdelete);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
