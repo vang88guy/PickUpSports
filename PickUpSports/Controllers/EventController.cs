@@ -133,7 +133,7 @@ namespace PickUpSports.Controllers
                     return RedirectToAction("Index");
                 }
 
-                ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "UserRole", player.Id);
+                ViewBag.ApplicationUserId = new SelectList(db.Users, "PlayerId", "UserRole", player.PlayerId);
                 return View(player);
             }
 

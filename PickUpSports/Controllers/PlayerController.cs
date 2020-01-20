@@ -26,7 +26,7 @@ namespace PickUpSports.Controllers
             // GET: Players/Details/5
             public ActionResult Details(int id)
             {
-                var player = db.Player.Include(p => p.ApplicationUser).FirstOrDefault(p => p.Id == id);
+                var player = db.Player.Include(p => p.ApplicationUser).FirstOrDefault(p => p.PlayerId == id);
                 return View(player);
             }
 
@@ -46,6 +46,7 @@ namespace PickUpSports.Controllers
                     // TODO: Add insert logic here
                     player.ApplicationId = User.Identity.GetUserId();
                     db.Player.Add(player);
+
                     db.SaveChanges();
 
                     return RedirectToAction("LogOut", "Account");

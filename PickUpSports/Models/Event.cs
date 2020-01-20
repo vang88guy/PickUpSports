@@ -10,7 +10,7 @@ namespace PickUpSports.Models
     public class Event
     {
         [Key]
-        public int Id { get; set; }
+        public int EventId { get; set; }
         [Display(Name = "Event Name")]
         public string EventName { get; set; }
         [Display(Name = "Sport")]

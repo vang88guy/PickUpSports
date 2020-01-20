@@ -10,7 +10,7 @@ namespace PickUpSports.Models
     public class Player
     {
         [Key]
-        public int Id { get; set; }
+        public int PlayerId { get; set; }
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Display(Name = "Last Name")]
