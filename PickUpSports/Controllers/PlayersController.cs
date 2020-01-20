@@ -32,6 +32,8 @@ namespace PickUpSports.Controllers
         public ActionResult Create()
         {
             Player player = new Player();
+            var sports = db.Sport.Select(s=>s.SportName).ToList();
+            ViewBag.Sports = new SelectList(sports);
             return View(player);
         }
 
@@ -91,6 +93,10 @@ namespace PickUpSports.Controllers
         public ActionResult Delete(int id)
         {
             var player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
+<<<<<<< HEAD
+=======
+            
+>>>>>>> 2431dfd9f99c64dcc88b7c17b11f524cc96838a0
             return View(player);
         }
 
