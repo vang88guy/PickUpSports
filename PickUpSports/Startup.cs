@@ -12,11 +12,10 @@ namespace PickUpSports
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            ConfigureAuth(app);
             createRolesandUsers();
         }
 
-        // In this method we will create default User roles and Admin user for login    
+   
         private void createRolesandUsers()
         {
             ApplicationDbContext context = new ApplicationDbContext();
@@ -42,6 +41,7 @@ namespace PickUpSports
 
                 string userPWD = "Qwak9214";
 
+
                 var chkUser = UserManager.Create(user, userPWD);
 
                 //Add default User to Role Admin    
@@ -55,6 +55,7 @@ namespace PickUpSports
            
 
             // creating Creating Player role     
+
             if (!roleManager.RoleExists("Player"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();

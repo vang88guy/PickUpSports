@@ -31,6 +31,4 @@ namespace PickUpSports.Models
 
     }
 
-
-    
 }

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PickUpSports.Models
 {
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
@@ -65,10 +66,20 @@ namespace PickUpSports.Models
 
     public class RegisterViewModel
     {
+        //[Required]
+        [Display(Name = "UserRoles")]
+        public string UserRoles { get; set; }
+
+        [Required]
+
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+       
 
         [Required]
         [Display(Name = "UserRoles")]
