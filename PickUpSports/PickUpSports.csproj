@@ -187,10 +187,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Controllers\PlayersController.cs" />
+    <!-- <Compile Include="Controllers\PlayersController.cs" /> -->
     <Compile Include="Controllers\SMSController.cs" />
     <Compile Include="Controllers\usersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -199,6 +199,10 @@
     <Compile Include="Migrations\202001201715466_re reseeding.cs" />
     <Compile Include="Migrations\202001201715466_re reseeding.Designer.cs">
       <DependentUpon>202001201715466_re reseeding.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001202139193_userRoles and Email.cs" />
+    <Compile Include="Migrations\202001202139193_userRoles and Email.Designer.cs">
+      <DependentUpon>202001202139193_userRoles and Email.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -220,6 +224,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CSSStyle.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -274,13 +279,15 @@
     <!--
     <Content Include="Views\users\Index.cshtml" />
 -->
-    <Content Include="Views\Players\Create.cshtml" />
     <Content Include="Views\Players\Index.cshtml" />
+    <Content Include="Views\Players\Create.cshtml" />
+    <Content Include="Views\Players\Edit.cshtml" />
+    <Content Include="Views\Players\Delete.cshtml" />
+    <Content Include="Views\Players\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Event\" />
-    <Folder Include="Views\Player\" />
     <Folder Include="Views\SMS\" />
   </ItemGroup>
   <ItemGroup>
@@ -299,6 +306,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202001201715466_re reseeding.resx">
       <DependentUpon>202001201715466_re reseeding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001202139193_userRoles and Email.resx">
+      <DependentUpon>202001202139193_userRoles and Email.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

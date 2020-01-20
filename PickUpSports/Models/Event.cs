@@ -25,9 +25,11 @@ namespace PickUpSports.Models
         public int ZipCode { get; set; }
         [Display(Name = "Event Is Full")]
         public bool IsFull { get; set; }
-        [ForeignKey("ApplicationUser")]
-        public string ApplicationId { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
+       
+        [ForeignKey("Player")]
+        public int PlayerId { get; set; }
+        public Player Player { get; set; }
+        
 
     }
 

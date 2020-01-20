@@ -66,19 +66,18 @@ namespace PickUpSports.Models
 
     public class RegisterViewModel
     {
-        //[Required]
-        [Display(Name = "UserRoles")]
-        public string UserRoles { get; set; }
-
-        [Required]
-
-        [Display(Name = "UserName")]
-        public string UserName { get; set; }
-
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "E-Mail")]
         public string Email { get; set; }
+
+        [Display(Name = "User Roles")]
+        public string UserRoles { get; set; }
+
+
+        [Required]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
        
 
         [Required]
