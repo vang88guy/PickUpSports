@@ -23,6 +23,16 @@ namespace PickUpSports.Models
         public string State { get; set; }
         [Display(Name = "Zip Code")]
         public int ZipCode { get; set; }
+        [Display(Name = "Skill Level")]
+        public int SkillLevel { get; set; }
+        [Display(Name = "Player Rating")]
+        public int PlayerRating { get; set; }
+        [Display(Name = "Date")]
+        public string DateOfEvent { get; set; }
+        [Display(Name = "Time")]
+        public string TimeOfEvent { get; set; }
+        [Display(Name = "Maximum Players")]
+        public int MaximumPlayers { get; set; }
         [Display(Name = "Event Is Full")]
         public bool IsFull { get; set; }
        

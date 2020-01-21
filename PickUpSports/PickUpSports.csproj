@@ -187,7 +187,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
@@ -272,10 +272,10 @@
     <Content Include="Views\Players\Delete.cshtml" />
     <Content Include="Views\Players\Details.cshtml" />
     <Content Include="Views\users\Index.cshtml" />
+    <Content Include="Views\Events\PlayerInterestEvents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Event\" />
     <Folder Include="Views\SMS\" />
   </ItemGroup>
   <ItemGroup>
