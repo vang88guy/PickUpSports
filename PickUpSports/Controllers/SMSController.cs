@@ -15,6 +15,7 @@ namespace PickUpSports.Controllers
 {
     public class SMSController : TwilioController
     {
+        //sends an automated message to phone
         public ActionResult SendSMS()
         {
             var accountSid = TwilioAcct;

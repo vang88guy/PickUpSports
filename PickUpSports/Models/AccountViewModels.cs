@@ -66,21 +66,20 @@ namespace PickUpSports.Models
 
     public class RegisterViewModel
     {
-        
-
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "E-Mail")]
         public string Email { get; set; }
-       
 
-        
-        [Display(Name = "UserRoles")]
+
+        [Display(Name = "User Roles")]
         public string UserRoles { get; set; }
 
+
         [Required]
-        [Display(Name = "UserName")]
+        [Display(Name = "User Name")]
         public string UserName { get; set; }
+       
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
