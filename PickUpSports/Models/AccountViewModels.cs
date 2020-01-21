@@ -71,12 +71,8 @@ namespace PickUpSports.Models
         [Display(Name = "E-Mail")]
         public string Email { get; set; }
 
-<<<<<<< HEAD
+
         [Display(Name = "User Roles")]
-=======
-        
-        [Display(Name = "UserRoles")]
->>>>>>> 2431dfd9f99c64dcc88b7c17b11f524cc96838a0
         public string UserRoles { get; set; }
 
 

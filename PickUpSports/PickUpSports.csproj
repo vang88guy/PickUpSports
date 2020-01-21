@@ -200,10 +200,10 @@
     <Compile Include="Migrations\202001201715466_re reseeding.Designer.cs">
       <DependentUpon>202001201715466_re reseeding.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001202139193_userRoles and Email.cs"/>
+    <Compile Include="Migrations\202001202139193_userRoles and Email.cs" />
     <Compile Include="Migrations\202001202139193_userRoles and Email.Designer.cs">
       <DependentUpon>202001202139193_userRoles and Email.cs</DependentUpon>
-    </Compile> 
+    </Compile>
     <Compile Include="Migrations\202001202042561_Change name of player and event table.cs" />
     <Compile Include="Migrations\202001202042561_Change name of player and event table.Designer.cs">
       <DependentUpon>202001202042561_Change name of player and event table.cs</DependentUpon>
@@ -218,13 +218,9 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Parks.cs" />
-    <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Sport.cs" />
     <Compile Include="Models\TwilioAPIKey.cs" />
-    
     <Compile Include="Models\Player.cs" />
-    <Compile Include="Models\PlayerCreateViewModel.cs" />
-     
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -313,19 +309,16 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-
     <EmbeddedResource Include="Migrations\202001201715466_re reseeding.resx">
       <DependentUpon>202001201715466_re reseeding.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001202139193_userRoles and Email.resx">
       <DependentUpon>202001202139193_userRoles and Email.cs</DependentUpon>
-
-  <!--  <EmbeddedResource Include="Migrations\202001202042561_Change name of player and event table.resx">
+      <!--  <EmbeddedResource Include="Migrations\202001202042561_Change name of player and event table.resx">
       <DependentUpon>202001202042561_Change name of player and event table.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001202115538_Made new table for sports.resx">
       <DependentUpon>202001202115538_Made new table for sports.cs</DependentUpon> -->
-
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
