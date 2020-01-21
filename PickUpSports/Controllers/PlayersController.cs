@@ -109,7 +109,6 @@ namespace PickUpSports.Controllers
         public ActionResult Delete(int id)
         {
             var player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
-
             return View(player);
         }
 
