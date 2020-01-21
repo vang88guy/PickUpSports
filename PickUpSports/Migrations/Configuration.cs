@@ -23,7 +23,7 @@ namespace PickUpSports.Migrations
             new Models.Sport { SportName = "Football" },
             new Models.Sport { SportName = "Tennis", },
             new Models.Sport { SportName = "Volleyball" },
-            new Models.Sport { SportName = "Sccorer" });
+            new Models.Sport { SportName = "Soccer" });
         }
     }
 }

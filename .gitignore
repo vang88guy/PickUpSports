@@ -351,4 +351,4 @@ MigrationBackup/
 
 Web.config
 TwilioAPIKey.cs
-Migrations
+Migrations/
