@@ -18,12 +18,6 @@ namespace PickUpSports.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
-            context.Sport.AddOrUpdate(
-            new Models.Sport { SportName = "Basketball" },
-            new Models.Sport { SportName = "Football" },
-            new Models.Sport { SportName = "Tennis", },
-            new Models.Sport { SportName = "Volleyball" },
-            new Models.Sport { SportName = "Sccorer" });
         }
     }
 }

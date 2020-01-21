@@ -11,11 +11,9 @@ namespace PickUpSports.Controllers
 {
     public class EventController : Controller
     {
-        public ApplicationDbContext context = new ApplicationDbContext();
+        public ApplicationDbContext db = new ApplicationDbContext();
         // GET: Event
-        public class EventController 
-        {
-            private ApplicationDbContext db = new ApplicationDbContext();
+        
 
             // GET: Players // filtering by live events happening today.
             //public ActionResult Index()
@@ -173,6 +171,6 @@ namespace PickUpSports.Controllers
 
                 return RedirectToAction("Index");
             }
-        }
+        
     }
 }

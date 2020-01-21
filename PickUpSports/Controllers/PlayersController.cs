@@ -32,8 +32,8 @@ namespace PickUpSports.Controllers
         public ActionResult Create()
         {
             Player player = new Player();
-            var sports = db.Sport.Select(s=>s.SportName).ToList();
-            ViewBag.Sports = new SelectList(sports);
+            var SportsInterest = db.Sport.Select(s=>s.SportName).ToList();
+            ViewBag.SportsInterest = new SelectList(SportsInterest);
             return View(player);
         }
 
@@ -62,6 +62,8 @@ namespace PickUpSports.Controllers
         public ActionResult Edit(int id)
         {
             var player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
+            var SportsInterest = db.Sport.Select(s => s.SportName).ToList();
+            ViewBag.SportsInterest = new SelectList(SportsInterest);
             return View(player);
         }
 
@@ -69,10 +71,13 @@ namespace PickUpSports.Controllers
         [HttpPost]
         public ActionResult Edit(int id, Player player)
         {
+            
             try
             {
                 // TODO: Add update logic here
-                var playeredit = db.Player.Where(p => p.PlayerId == id).FirstOrDefault();
+                var SportsInterest = db.Sport.Select(s => s.SportName).ToList();
+                ViewBag.SportsInterest = new SelectList(SportsInterest);
+                var playeredit = db.Player.Include(p=>p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
                 playeredit.FirstName = player.FirstName;
                 playeredit.LastName = player.LastName;
                 playeredit.PhoneNumber = player.PhoneNumber;
@@ -81,6 +86,7 @@ namespace PickUpSports.Controllers
                 playeredit.ApplicationUser.UserName = player.ApplicationUser.UserName;
                 playeredit.ApplicationUser.Email = player.ApplicationUser.Email;
                 db.SaveChanges();
+               
                 return RedirectToAction("Index");
             }
             catch

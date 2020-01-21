@@ -187,15 +187,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
-    <!-- <Compile Include="Controllers\PlayersController.cs" /> -->
     <Compile Include="Controllers\SMSController.cs" />
     <Compile Include="Controllers\usersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+
     <Compile Include="Migrations\202001211442202_thing.cs" />
     <Compile Include="Migrations\202001211442202_thing.Designer.cs">
       <DependentUpon>202001211442202_thing.cs</DependentUpon>
@@ -207,6 +208,8 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Parks.cs" />
     <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\PlayerEvent.cs" />
+    <Compile Include="Models\SkillLevel.cs" />
     <Compile Include="Models\Sport.cs" />
     <Compile Include="Models\TwilioAPIKey.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -269,14 +272,12 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <!--
-    <Content Include="Views\users\Index.cshtml" />
--->
     <Content Include="Views\Players\Index.cshtml" />
     <Content Include="Views\Players\Create.cshtml" />
     <Content Include="Views\Players\Edit.cshtml" />
     <Content Include="Views\Players\Delete.cshtml" />
     <Content Include="Views\Players\Details.cshtml" />
+    <Content Include="Views\users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -296,11 +297,13 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
+
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202001211442202_thing.resx">
       <DependentUpon>202001211442202_thing.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
