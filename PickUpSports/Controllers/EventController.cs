@@ -13,7 +13,7 @@ namespace PickUpSports.Controllers
     {
         public ApplicationDbContext context = new ApplicationDbContext();
         // GET: Event
-        public class EmployeesController : Controller
+        public class EventController 
         {
             private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -82,14 +82,14 @@ namespace PickUpSports.Controllers
 
             }
 
-            // GET: Employees/Create
+            // GET: Players/Create
             public ActionResult Create()
             {
                 ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email");
                 return View();
             }
 
-            // POST: Employees/Create
+            // POST: Players/Create
             // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
             // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
             [HttpPost]
@@ -107,7 +107,7 @@ namespace PickUpSports.Controllers
                 return View();
             }
 
-            // GET: Employees/Edit/5
+            // GET: Plyayers/Edit/5
             //public ActionResult Edit(int? id)
             //{
             //    if (id == null)
@@ -117,12 +117,12 @@ namespace PickUpSports.Controllers
                 
             //}
 
-            // POST: Employees/Edit/5
+            // POST: Players/Edit/5
             // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
             // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
             [HttpPost]
             [ValidateAntiForgeryToken]
-            public ActionResult Edit([Bind(Include = "Id,Name,Zip,Address,PickupStartDate,PickupEndDate,DayOfWeek,ApplicationUserId")] Player player)
+            public ActionResult Edit([Bind(Include = "PlayerId,Name,Zip,Address,SportsInterest,ApplicationUserId")] Player player)
             {
                
                 if (ModelState.IsValid)
@@ -141,13 +141,13 @@ namespace PickUpSports.Controllers
 
 
 
-            // GET: Employees/Delete/5
+            // GET: Players/Delete/5
             //public ActionResult Delete(int? id)
             //{
                 
             //}
 
-            // POST: Employees/Delete/5
+            // POST: Players/Delete/5
             [HttpPost, ActionName("Delete")]
             [ValidateAntiForgeryToken]
             public ActionResult DeleteConfirmed(int id)
