@@ -7,13 +7,13 @@ namespace PickUpSports.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class PhoneNumber : IMigrationMetadata
+    public sealed partial class userRolesandEmail : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(PhoneNumber));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(userRolesandEmail));
         
         string IMigrationMetadata.Id
         {
-            get { return "202001171556361_PhoneNumber"; }
+            get { return "202001202139193_userRoles and Email"; }
         }
         
         string IMigrationMetadata.Source

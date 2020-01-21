@@ -7,13 +7,13 @@ namespace PickUpSports.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Initial : IMigrationMetadata
+    public sealed partial class rereseeding : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(rereseeding));
         
         string IMigrationMetadata.Id
         {
-            get { return "202001171415504_Initial"; }
+            get { return "202001201715466_re reseeding"; }
         }
         
         string IMigrationMetadata.Source

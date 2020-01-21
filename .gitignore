@@ -350,10 +350,5 @@ MigrationBackup/
 .ionide/
 
 Web.config
-
-
-/Migrations/
-
 TwilioAPIKey.cs
-
-
+/Migrations/*

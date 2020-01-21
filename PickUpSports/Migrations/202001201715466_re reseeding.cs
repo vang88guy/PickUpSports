@@ -3,7 +3,7 @@ namespace PickUpSports.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class rereseeding : DbMigration
     {
         public override void Up()
         {
@@ -11,7 +11,7 @@ namespace PickUpSports.Migrations
                 "dbo.Events",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        EventId = c.Int(nullable: false, identity: true),
                         EventName = c.String(),
                         SportsName = c.String(),
                         StreetAddress = c.String(),
@@ -21,7 +21,7 @@ namespace PickUpSports.Migrations
                         IsFull = c.Boolean(nullable: false),
                         ApplicationId = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => t.Id)
+                .PrimaryKey(t => t.EventId)
                 .ForeignKey("dbo.AspNetUsers", t => t.ApplicationId)
                 .Index(t => t.ApplicationId);
             
@@ -87,15 +87,16 @@ namespace PickUpSports.Migrations
                 "dbo.Players",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        PlayerId = c.Int(nullable: false, identity: true),
                         FirstName = c.String(),
                         LastName = c.String(),
                         ZipCode = c.Int(nullable: false),
+                        PhoneNumber = c.String(),
                         PlayLevel = c.Int(nullable: false),
                         PlayerRating = c.Int(nullable: false),
                         ApplicationId = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => t.Id)
+                .PrimaryKey(t => t.PlayerId)
                 .ForeignKey("dbo.AspNetUsers", t => t.ApplicationId)
                 .Index(t => t.ApplicationId);
             

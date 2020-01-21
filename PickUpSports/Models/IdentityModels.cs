@@ -23,7 +23,11 @@ namespace PickUpSports.Models
 
         public DbSet<Player> Player { get; set; }
         public DbSet<Event> Event { get; set; }
+<<<<<<< HEAD
+      
+=======
         public DbSet<Sport> Sport { get; set; }
+>>>>>>> 2431dfd9f99c64dcc88b7c17b11f524cc96838a0
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
