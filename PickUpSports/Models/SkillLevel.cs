@@ -13,6 +13,6 @@ namespace PickUpSports.Models
         [Key]
         public int Id { get; set; }
         [Display(Name = "Skill Level")]
-        public string Level { get; set; }
+        public int Level { get; set; }
     }
 }

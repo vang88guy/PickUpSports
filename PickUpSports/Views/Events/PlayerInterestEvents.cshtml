@@ -1,0 +1,99 @@
+﻿@model IEnumerable<PickUpSports.Models.Event>
+
+@{
+    ViewBag.Title = "PlayerInterestEvents";
+}
+
+<h2>PlayerInterestEvents</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EventName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SportsName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StreetAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SkillLevel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlayerRating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfEvent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeOfEvent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaximumPlayers)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsFull)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SportsName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StreetAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.State)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ZipCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SkillLevel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlayerRating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfEvent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeOfEvent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaximumPlayers)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsFull)
+        </td>
+        <td>   
+            @Html.ActionLink("Join Event", "JoinEvent", new { id=item.EventId }) |           
+            @Html.ActionLink("Details", "Details", new { id=item.EventId }) |
+            @*@Html.ActionLink("Delete", "Delete", new { id=item.EventId })*@
+        </td>
+    </tr>
+}
+
+</table>

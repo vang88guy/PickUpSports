@@ -187,7 +187,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
@@ -195,6 +195,18 @@
     <Compile Include="Controllers\usersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001211648313_Initial.cs" />
+    <Compile Include="Migrations\202001211648313_Initial.Designer.cs">
+      <DependentUpon>202001211648313_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001211724397_Add skilllevel and player rating to event.cs" />
+    <Compile Include="Migrations\202001211724397_Add skilllevel and player rating to event.Designer.cs">
+      <DependentUpon>202001211724397_Add skilllevel and player rating to event.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001212021565_Add time, date, and max players to event.cs" />
+    <Compile Include="Migrations\202001212021565_Add time, date, and max players to event.Designer.cs">
+      <DependentUpon>202001212021565_Add time, date, and max players to event.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -273,10 +285,10 @@
     <Content Include="Views\Players\Delete.cshtml" />
     <Content Include="Views\Players\Details.cshtml" />
     <Content Include="Views\users\Index.cshtml" />
+    <Content Include="Views\Events\PlayerInterestEvents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Event\" />
     <Folder Include="Views\SMS\" />
   </ItemGroup>
   <ItemGroup>
@@ -291,6 +303,17 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202001211648313_Initial.resx">
+      <DependentUpon>202001211648313_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001211724397_Add skilllevel and player rating to event.resx">
+      <DependentUpon>202001211724397_Add skilllevel and player rating to event.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001212021565_Add time, date, and max players to event.resx">
+      <DependentUpon>202001212021565_Add time, date, and max players to event.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
