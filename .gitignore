@@ -349,11 +349,5 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
-Web.config
-
-
-/Migrations/
-
-TwilioAPIKey.cs
-
+PrivateKeys.cs
 
