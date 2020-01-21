@@ -2,8 +2,10 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="styles/normalize.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <title>@ViewBag.Title - PickUp Sports</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -12,12 +14,8 @@
     <header role="banner">
         <img id="logo-main" src="~/Content/pusheaderFinalpng.png" style="width:1265px;height:150px;"  alt="PickUp sports logo">
         <nav id="navbar-primary" class="navbar navbar-default" role="navigation">
-<<<<<<< HEAD
-            <div class="container-fluid">   
-                <!-- Brand and toggle get grouped for better mobile display -->
-=======
+
             <div class="container-fluid">
->>>>>>> acd2fe011999430c8ec3650f566981303e63405e
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-primary-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -42,36 +40,8 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
-<<<<<<< HEAD
-    <!-- header role="banner" -->
-    <!-- <div class="navbar navbar-inverse navbar-fixed-top">
-         <div class="container">
-             <div class="navbar-header">
-                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                 </button>
-                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-             </div>
-             <div class="navbar-collapse collapse">
-                 <ul class="nav navbar-nav">
-                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                     @if (User.IsInRole("Player") == true)
-                     {
-                         <li>@Html.ActionLink("Player Details", "Details", "Players")</li>
-                         <li>@Html.ActionLink("Create Event", "Create", "Event")</li>
-                     }
-                 </ul>
-                 @Html.Partial("_LoginPartial")
-             </div>
-         </div>
-     </div> -->
-=======
     </header><!-- header role="banner" -->
->>>>>>> acd2fe011999430c8ec3650f566981303e63405e
+
     <div class="container body-content">
         @RenderBody()
         <hr />

@@ -1,14 +1,18 @@
 ﻿@model PickUpSports.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Create an account and Get In The Game!";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2 style="color:whitesmoke">@ViewBag.Title</h2>
+<body background="~/Content/fball2.jpg">
+   
+</body>
+
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
+    <h4></h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
@@ -43,7 +47,6 @@
         </div>
     </div>
 }
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
