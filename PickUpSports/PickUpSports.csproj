@@ -187,30 +187,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
-    <!-- <Compile Include="Controllers\PlayersController.cs" /> -->
     <Compile Include="Controllers\SMSController.cs" />
     <Compile Include="Controllers\usersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001201715466_re reseeding.cs" />
-    <Compile Include="Migrations\202001201715466_re reseeding.Designer.cs">
-      <DependentUpon>202001201715466_re reseeding.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001202139193_userRoles and Email.cs" />
-    <Compile Include="Migrations\202001202139193_userRoles and Email.Designer.cs">
-      <DependentUpon>202001202139193_userRoles and Email.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001202042561_Change name of player and event table.cs" />
-    <Compile Include="Migrations\202001202042561_Change name of player and event table.Designer.cs">
-      <DependentUpon>202001202042561_Change name of player and event table.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001202115538_Made new table for sports.cs" />
-    <Compile Include="Migrations\202001202115538_Made new table for sports.Designer.cs">
-      <DependentUpon>202001202115538_Made new table for sports.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -218,9 +202,11 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Parks.cs" />
+    <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\PlayerEvent.cs" />
+    <Compile Include="Models\SkillLevel.cs" />
     <Compile Include="Models\Sport.cs" />
     <Compile Include="Models\TwilioAPIKey.cs" />
-    <Compile Include="Models\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -281,14 +267,12 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <!--
-    <Content Include="Views\users\Index.cshtml" />
--->
     <Content Include="Views\Players\Index.cshtml" />
     <Content Include="Views\Players\Create.cshtml" />
     <Content Include="Views\Players\Edit.cshtml" />
     <Content Include="Views\Players\Delete.cshtml" />
     <Content Include="Views\Players\Details.cshtml" />
+    <Content Include="Views\users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -307,19 +291,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001201715466_re reseeding.resx">
-      <DependentUpon>202001201715466_re reseeding.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001202139193_userRoles and Email.resx">
-      <DependentUpon>202001202139193_userRoles and Email.cs</DependentUpon>
-      <!--  <EmbeddedResource Include="Migrations\202001202042561_Change name of player and event table.resx">
-      <DependentUpon>202001202042561_Change name of player and event table.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001202115538_Made new table for sports.resx">
-      <DependentUpon>202001202115538_Made new table for sports.cs</DependentUpon> -->
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

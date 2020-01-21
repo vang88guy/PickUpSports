@@ -25,6 +25,8 @@ namespace PickUpSports.Models
         public DbSet<Event> Event { get; set; }
 
         public DbSet<Sport> Sport { get; set; }
+        public DbSet<PlayerEvent> PlayerEvent { get; set; }
+        public DbSet<SkillLevel> SkillLevel { get; set; }
 
 
         public ApplicationDbContext()
