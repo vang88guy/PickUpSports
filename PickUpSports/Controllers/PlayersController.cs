@@ -32,8 +32,8 @@ namespace PickUpSports.Controllers
         public ActionResult Create()
         {
             Player player = new Player();
-            var sports = db.Sport.Select(s=>s.SportName).ToList();
-            ViewBag.Sports = new SelectList(sports);
+            var SportsInterest = db.Sport.Select(s=>s.SportName).ToList();
+            ViewBag.SportsInterest = new SelectList(SportsInterest);
             return View(player);
         }
 
