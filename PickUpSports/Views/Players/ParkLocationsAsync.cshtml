@@ -13,7 +13,8 @@
 <script>
     function initializeMap()
     {
-        var map = new google.maps.Map(document.getElementById('map'), { zoom: 4 });
+        var center = { lat: 43.038902, lng: -87.906471};
+        var map = new google.maps.Map(document.getElementById('map'), { zoom: 4, center: center});
         @foreach(var park in Model)
         {
             <text>
