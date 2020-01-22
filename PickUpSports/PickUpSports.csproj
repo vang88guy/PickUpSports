@@ -196,11 +196,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\googlePlacesJSON.cs" />
+    <Compile Include="Models\GooglePlacesKey.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Parks.cs" />
+    <Compile Include="Models\Park.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\PlayerEvent.cs" />
     <Compile Include="Models\SkillLevel.cs" />
