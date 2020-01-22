@@ -10,11 +10,18 @@ using Twilio.Types;
 using Twilio.TwiML;
 using Twilio.AspNet.Mvc;
 using static PickUpSports.Models.TwilioAPIKey;
+using PickUpSports.Models;
 
 namespace PickUpSports.Controllers
 {
     public class SMSController : TwilioController
     {
+        public ApplicationDbContext db;
+        public Player player;
+        public SMSController()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+        }
         //sends an automated message to phone
         public ActionResult SendSMS()
         {
@@ -22,6 +29,7 @@ namespace PickUpSports.Controllers
             var authToken = TwilioToken;
             TwilioClient.Init(accountSid, authToken);
 
+            
             var to = new PhoneNumber("+19202542672");
             var from = new PhoneNumber("+12562420890");
 
@@ -39,6 +47,8 @@ namespace PickUpSports.Controllers
             response.Message("");
             return TwiML(response);
         }
+
+
     
     }
 
