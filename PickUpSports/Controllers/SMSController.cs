@@ -10,12 +10,14 @@ using Twilio.Types;
 using Twilio.TwiML;
 using Twilio.AspNet.Mvc;
 using static PickUpSports.Models.TwilioAPIKey;
+using System.Windows.Documents;
 
 namespace PickUpSports.Controllers
 {
     public class SMSController : TwilioController
     {
         //sends an automated message to phone
+        
         public ActionResult SendSMS()
         {
             var accountSid = TwilioAcct;
@@ -39,7 +41,12 @@ namespace PickUpSports.Controllers
             response.Message("");
             return TwiML(response);
         }
-    
+        
+        public List GetPhoneNumbers(List phonenumbers) 
+        {
+
+            return phonenumbers;
+        }
     }
 
 }
