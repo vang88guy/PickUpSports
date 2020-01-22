@@ -1,22 +1,21 @@
 ﻿@model IEnumerable<PickUpSports.Models.Event>
 
 @{
-    ViewBag.Title = "PlayerInterestEvents";
+    ViewBag.Title = "Index";
 }
 
-<h2>PlayerInterestEvents</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
-
-        <th>
-            @Html.DisplayNameFor(model => model.EventName)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.Player.ApplicationUser.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.SportsName)
@@ -60,10 +59,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.EventName)
+            @Html.DisplayFor(modelItem => item.Player.ApplicationUser.UserName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Player.ApplicationUser.UserName)
+            @Html.DisplayFor(modelItem => item.EventName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.SportsName)

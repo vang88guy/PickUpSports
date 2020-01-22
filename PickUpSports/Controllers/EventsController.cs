@@ -3,6 +3,7 @@ using PickUpSports.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,21 +17,47 @@ namespace PickUpSports.Controllers
         {
             db = new ApplicationDbContext();
         }
+        
         // GET: Events
         public ActionResult Index()
         {           
-            var events = db.Event.Include(e => e.Player);
+            var events = db.Event.Include(e => e.Player).Include(e=>e.Player.ApplicationUser);
             return View(events);
         }
 
         // Get Events that Player is interested in
         public ActionResult PlayerInterestEvents() 
         {
-            string datenow = System.DateTime.Now.ToString("MM/dd/yyyy");
-            var userid = User.Identity.GetUserId();
-            var player = db.Player.Include(s => s.ApplicationUser).Where(p => p.ApplicationId == userid).FirstOrDefault();            
-            var events = db.Event.Include(e => e.Player).Where(e => e.SportsName == player.SportsInterest && e.ZipCode == player.ZipCode && e.SkillLevel == player.SkillLevel && e.DateOfEvent == datenow).FirstOrDefault();
-            return View(events);
+            try
+            {
+                string datenow = System.DateTime.Now.ToString("yyyy-MM-dd");
+                var userid = GetId();
+                var player = GetPlayer(userid);
+                var events = db.Event.Include(e => e.Player).Include(e => e.Player.ApplicationUser).Where(e => e.SportsName == player.SportsInterest && e.ZipCode == player.ZipCode && e.SkillLevel == player.SkillLevel && e.DateOfEvent == datenow).ToList();
+                return View(events);
+            }
+            catch (Exception)
+            {
+                return View();
+            }           
+        }       
+
+        //Get Events that player created
+
+        public ActionResult MyEvents() 
+        {
+            try
+            {
+                var userid = GetId();
+                var player = GetPlayer(userid);
+                var myevents = db.Event.Include(e => e.Player).Include(e => e.Player.ApplicationUser).Where(e => e.PlayerId == player.PlayerId).ToList();
+                return View(myevents);
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+            
         }
 
         //Join Event
@@ -59,8 +86,8 @@ namespace PickUpSports.Controllers
             Event eventcreate = new Event();
             var skilllevel = db.SkillLevel.Select(s => s.Level).ToList();
             ViewBag.SkillLevel = new SelectList(skilllevel);
-            var SportName = db.Sport.Select(s => s.SportName).ToList();
-            ViewBag.SportName = new SelectList(SportName);
+            var SportsName = db.Sport.Select(s => s.SportName).ToList();
+            ViewBag.SportsName = new SelectList(SportsName);
             return View(eventcreate);
         }
 
@@ -73,12 +100,23 @@ namespace PickUpSports.Controllers
                 // TODO: Add insert logic here
                 var skilllevel = db.SkillLevel.Select(s => s.Level).ToList();
                 ViewBag.SkillLevel = new SelectList(skilllevel);
-                var SportName = db.Sport.Select(s => s.SportName).ToList();
-                ViewBag.SportName = new SelectList(SportName);
-                var userid = User.Identity.GetUserId();
-                int playerrating = db.Player.Include(p => p.ApplicationUser).Where(p => p.ApplicationId == userid).Select(p => p.PlayerRating).FirstOrDefault();
-                eventone.PlayerRating = playerrating;
-                return RedirectToAction("Index");
+                var SportsName = db.Sport.Select(s => s.SportName).ToList();
+                ViewBag.SportsName = new SelectList(SportsName);
+                var userid = GetId();
+                var player = GetPlayer(userid);
+                eventone.PlayerRating = player.PlayerRating;
+                eventone.PlayerId = player.PlayerId;
+                string date = eventone.DateOfEvent;
+                DateTime dateformat = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                string dateofevent = dateformat.ToString("MM/dd/yyyy");
+                string time = eventone.TimeOfEvent;
+                DateTime timeformat = DateTime.ParseExact(time, "HH:mm", CultureInfo.InvariantCulture);
+                string timeofevent = timeformat.ToString("h:mm tt");
+                eventone.TimeOfEvent = timeofevent;
+                eventone.DateOfEvent = dateofevent;
+                db.Event.Add(eventone);
+                db.SaveChanges();
+                return RedirectToAction("Details","Players");
             }
             catch
             {
@@ -92,8 +130,8 @@ namespace PickUpSports.Controllers
             var eventedit = db.Event.Include(e => e.Player).FirstOrDefault(e => e.EventId == id);
             var skilllevel = db.SkillLevel.Select(s => s.Level).ToList();
             ViewBag.SkillLevel = new SelectList(skilllevel);
-            var SportName = db.Sport.Select(s => s.SportName).ToList();
-            ViewBag.SportName = new SelectList(SportName);
+            var SportsName = db.Sport.Select(s => s.SportName).ToList();
+            ViewBag.SportsName = new SelectList(SportsName);
             return View(eventedit);
         }
 
@@ -106,8 +144,8 @@ namespace PickUpSports.Controllers
                 // TODO: Add update logic here
                 var skilllevel = db.SkillLevel.Select(s => s.Level).ToList();
                 ViewBag.SkillLevel = new SelectList(skilllevel);
-                var SportName = db.Sport.Select(s => s.SportName).ToList();
-                ViewBag.SportName = new SelectList(SportName);
+                var SportsName = db.Sport.Select(s => s.SportName).ToList();
+                ViewBag.SportsName = new SelectList(SportsName);
                 var eventoriginal = db.Event.Include(e => e.Player).FirstOrDefault(e => e.EventId == id);
                 eventoriginal.EventName = eventedit.EventName;
                 eventoriginal.SportsName = eventedit.SportsName;
@@ -147,6 +185,18 @@ namespace PickUpSports.Controllers
             {
                 return View();
             }
+        }
+
+        public string GetId()
+        {
+            var userid = User.Identity.GetUserId();
+            return userid;
+        }
+
+        public Player GetPlayer(string userid)
+        {
+            var player = db.Player.Include(s => s.ApplicationUser).Where(p => p.ApplicationId == userid).FirstOrDefault();
+            return player;
         }
     }
 }

@@ -17,7 +17,12 @@
         <img class="img-responsive" src="~/Content/pusheaderFinalpng.png" alt="PickUp sports logo">
         <nav id="navbar-primary" class="navbar navbar-default" role="navigation">
 
+<<<<<<< HEAD
+            <div class="container-fluid">   
+                <!-- Brand and toggle get grouped for better mobile display -->
+=======
             <div class="container-fluid">
+>>>>>>> c40d79511c752b630fb5d4d3410185584b5e522e
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-primary-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -35,10 +40,17 @@
                         }
                         @if (User.IsInRole("Player") == true)
                         {
+<<<<<<< HEAD
+                            <li>@Html.ActionLink("Today's Events", "PlayerInterestEvents", "Events")</li>
+                            <li>@Html.ActionLink("Player Details", "Details", "Players")</li>
+                            <li>@Html.ActionLink("Create Event", "Create", "Events")</li>
+                            <li>@Html.ActionLink("My Events","MyEvents","Events")</li>
+=======
                             <li>@Html.ActionLink("Home", "Index", "Players")</li>
                             <li>@Html.ActionLink("Player Details", "Details", "Players")</li>
                             <li>@Html.ActionLink("Create Event", "Create", "Event")</li>
                             <li>@Html.ActionLink("See Nearby Parks", "ParkLocationsAsync", "Players")</li>
+>>>>>>> c40d79511c752b630fb5d4d3410185584b5e522e
                         }
                         <li>@Html.ActionLink("About", "About", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
@@ -47,6 +59,38 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
+<<<<<<< HEAD
+
+    <!-- header role="banner" -->
+    <!-- <div class="navbar navbar-inverse navbar-fixed-top">
+         <div class="container">
+             <div class="navbar-header">
+                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                 </button>
+                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+             </div>
+             <div class="navbar-collapse collapse">
+                 <ul class="nav navbar-nav">
+                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                     <li>@Html.ActionLink("About", "About", "Home")</li>
+                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                     @if (User.IsInRole("Player") == true)
+                     {
+                         <li>@Html.ActionLink("Today's Events", "PlayerInterestEvents", "Events")</li>
+                         <li>@Html.ActionLink("Player Details", "Details", "Players")</li>
+                         <li>@Html.ActionLink("Create Event", "Create", "Events")</li>
+                     }
+                 </ul>
+                 @Html.Partial("_LoginPartial")
+             </div>
+         </div>
+     </div> 
+
+=======
+>>>>>>> c40d79511c752b630fb5d4d3410185584b5e522e
     </header><!-- header role="banner" -->
 
     <div class="container body-content">
