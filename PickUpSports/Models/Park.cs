@@ -14,7 +14,8 @@ namespace PickUpSports.Models
         public string ParkName { get; set; }
         public float Latitude { get; set; }
         public float Longitude { get; set; }
-       
+
+        public string apiKeyString = "https://maps.googleapis.com/maps/api/js?key=" + GoogleMapsKey.Key + "&callback=initializeMap";
     }
 
 

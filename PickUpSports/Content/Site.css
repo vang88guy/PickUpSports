@@ -31,3 +31,7 @@ h2{
     color:whitesmoke;
     font-family:'Trebuchet MS'
 }
+
+#map{
+    height: 400px;
+}
