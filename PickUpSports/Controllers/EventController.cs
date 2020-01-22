@@ -16,36 +16,7 @@ namespace PickUpSports.Controllers
         public EventController()
         {
             db = new ApplicationDbContext();
-        }
-        // GET: Players // filtering by live events happening today.
-        //public ActionResult Index()
-        //{
-        //    string userId = User.Identity.GetUserId();
-        //    Player player = db.Player.Include(e=>e.ApplicationUser).Where(e => e.ApplicationId == userId).SingleOrDefault();
-        //    var today = Convert.ToString(DateTime.Now.DayOfWeek);
-        //    var todayDate = Convert.ToString(DateTime.Now.Date);
-        //    PlayerHomeViewModel viewModel = new PlayerHomeViewModel();
-        //    viewModel.Player = db.Player.Include(e => e.ApplicationUser).Where(c => c.ZipCode == player.ZipCode).FirstOrDefault();
-        //    viewModel.SportsInterest = new SelectList(new List<string>() { "Basketball", "Football", "Soccer", "Tennis", "Hockey" });
-        //    return View(viewModel);
-
-        //}
-
-        ////Filtering by sport interest
-        //[HttpPost]
-
-        //public ActionResult Index(PlayerHomeViewModel playerView)
-        //{
-        //    string userId = User.Identity.GetUserId();
-        //    Player player = db.Player.Where(e => e.ApplicationId == userId).SingleOrDefault();
-        //    PlayerHomeViewModel viewModel = new PlayerHomeViewModel();
-        //    viewModel.Player = db.Player.Include(e => e.ApplicationUser).Where(c => c.ZipCode == player.ZipCode && c.SportsInterest == playerView.SelectedSport).ToList();
-        //    viewModel.SportsInterest = new SelectList(new List<string>() { "Basketball", "Football", "Soccer", "Baseball", "Tennis", "Hockey", "Saturday" });
-        //    return View(viewModel);
-
-        //}
-
-           
+        }       
 
         // GET: Employees/Details/5
         public ActionResult Details(int? id)
@@ -68,7 +39,6 @@ namespace PickUpSports.Controllers
                 player = db.Player.Where(c => c.ApplicationId == FoundUserId).FirstOrDefault();
                 return View();
             }
-
             else
             {
                 player = db.Player.Find(id);
@@ -78,8 +48,6 @@ namespace PickUpSports.Controllers
                 return HttpNotFound();
             }
             return View(player);
-
-
         }
 
         // GET: Employees/Create
@@ -103,6 +71,7 @@ namespace PickUpSports.Controllers
                 return RedirectToAction("Index");
             }
 
+<<<<<<< HEAD
             ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", player.ApplicationId);
             return View();
         }
@@ -112,9 +81,17 @@ namespace PickUpSports.Controllers
         //{
         //    if (id == null)
         //    {
+=======
+            // GET: Plyayers/Edit/5
+            //public ActionResult Edit(int? id)
+            //{
+            //    if (id == null)
+            //    {
+>>>>>>> 30c5260ffdb8dfbec421e2a53026cfcdf0193e31
                     
         //    }
                 
+<<<<<<< HEAD
         //}
 
         // POST: Employees/Edit/5
@@ -124,6 +101,17 @@ namespace PickUpSports.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Zip,Address,PickupStartDate,PickupEndDate,DayOfWeek,ApplicationUserId")] Player player)
         {
+=======
+            //}
+
+            // POST: Players/Edit/5
+            // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+            // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+            [HttpPost]
+            [ValidateAntiForgeryToken]
+            public ActionResult Edit([Bind(Include = "PlayerId,Name,Zip,Address,SportsInterest,ApplicationUserId")] Player player)
+            {
+>>>>>>> 30c5260ffdb8dfbec421e2a53026cfcdf0193e31
                
             if (ModelState.IsValid)
             {
@@ -140,18 +128,32 @@ namespace PickUpSports.Controllers
 
 
 
+<<<<<<< HEAD
 
         // GET: Employees/Delete/5
         //public ActionResult Delete(int? id)
         //{
+=======
+            // GET: Players/Delete/5
+            //public ActionResult Delete(int? id)
+            //{
+>>>>>>> 30c5260ffdb8dfbec421e2a53026cfcdf0193e31
                 
         //}
 
+<<<<<<< HEAD
         // POST: Employees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+=======
+            // POST: Players/Delete/5
+            [HttpPost, ActionName("Delete")]
+            [ValidateAntiForgeryToken]
+            public ActionResult DeleteConfirmed(int id)
+            {
+>>>>>>> 30c5260ffdb8dfbec421e2a53026cfcdf0193e31
                 
             return RedirectToAction("Index");
         }
@@ -171,7 +173,13 @@ namespace PickUpSports.Controllers
         {
                 
 
+<<<<<<< HEAD
             return RedirectToAction("Index");
         }
+=======
+                return RedirectToAction("Index");
+            }
+        
+>>>>>>> 30c5260ffdb8dfbec421e2a53026cfcdf0193e31
     }
 }
