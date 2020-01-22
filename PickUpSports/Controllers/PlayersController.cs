@@ -81,7 +81,7 @@ namespace PickUpSports.Controllers
         [HttpPost]
         public ActionResult Edit(int id, Player player)
         {
-            
+
             try
             {
                 // TODO: Add update logic here
@@ -89,7 +89,7 @@ namespace PickUpSports.Controllers
                 ViewBag.SportsInterest = new SelectList(SportsInterest);
                 var skilllevel = db.SkillLevel.Select(s => s.Level).ToList();
                 ViewBag.SkillLevel = new SelectList(skilllevel);
-                var playeredit = db.Player.Include(p=>p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
+                var playeredit = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
                 playeredit.FirstName = player.FirstName;
                 playeredit.LastName = player.LastName;
                 playeredit.PhoneNumber = player.PhoneNumber;
@@ -98,7 +98,7 @@ namespace PickUpSports.Controllers
                 playeredit.ApplicationUser.UserName = player.ApplicationUser.UserName;
                 playeredit.ApplicationUser.Email = player.ApplicationUser.Email;
                 db.SaveChanges();
-               
+
                 return RedirectToAction("Index");
             }
             catch
@@ -130,32 +130,33 @@ namespace PickUpSports.Controllers
             }
             return View();
         }
-    // GET: Players/Delete/5
-    public ActionResult Delete(int id)
-    {
-        var player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
-
-        return View(player);
-    }
-
-    // POST: Players/Delete/5
-    [HttpPost]
-    public ActionResult Delete(int id, Player player)
-    {
-        try
+        // GET: Players/Delete/5
+        public ActionResult Delete(int id)
         {
-            // TODO: Add delete logic here
-            player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
-            var userdelete = db.Users.SingleOrDefault(c => c.Id == player.ApplicationId);
-            player.ApplicationId = null;
-            db.Player.Remove(player);
-            db.Users.Remove(userdelete);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            var player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
+
+            return View(player);
         }
-        catch
+
+        // POST: Players/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, Player player)
         {
-            return View();
+            try
+            {
+                // TODO: Add delete logic here
+                player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
+                var userdelete = db.Users.SingleOrDefault(c => c.Id == player.ApplicationId);
+                player.ApplicationId = null;
+                db.Player.Remove(player);
+                db.Users.Remove(userdelete);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

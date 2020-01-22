@@ -31,3 +31,17 @@ h2{
     color:whitesmoke;
     font-family:'Trebuchet MS'
 }
+
+#bckgrnd {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+.font1{
+    font-family:'Agency FB';
+}
+.intro{
+    font-size:xx-large;
+    font-family:'Agency FB';
+    
+}
