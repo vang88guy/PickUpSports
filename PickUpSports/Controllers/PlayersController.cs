@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 using PickUpSports.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 
@@ -32,7 +34,7 @@ namespace PickUpSports.Controllers
         public ActionResult Create()
         {
             Player player = new Player();
-            var SportsInterest = db.Sport.Select(s=>s.SportName).ToList();
+            var SportsInterest = db.Sport.Select(s => s.SportName).ToList();
             ViewBag.SportsInterest = new SelectList(SportsInterest);
             return View(player);
         }
@@ -89,33 +91,57 @@ namespace PickUpSports.Controllers
             }
         }
 
-        // GET: Players/Delete/5
-        public ActionResult Delete(int id)
+        public async System.Threading.Tasks.Task<ActionResult> ParkLocationsAsync(int id)
         {
-            var player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
-
-            return View(player);
-        }
-
-        // POST: Players/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, Player player)
-        {
-            try
+            Player player = db.Player.Find(id);
+            List<Park> parks = new List<Park>();
+            string url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=park+in+" + player.ZipCode + "&key=" + GooglePlacesKey.Key;
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync(url);
+            string jsonResult = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
             {
-                // TODO: Add delete logic here
-                player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();               
-                var userdelete = db.Users.SingleOrDefault(c => c.Id == player.ApplicationId);
-                player.ApplicationId = null;
-                db.Player.Remove(player);
-                db.Users.Remove(userdelete);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                PlacesJSONResult postManJSON = JsonConvert.DeserializeObject<PlacesJSONResult>(jsonResult);
+                foreach (var result in postManJSON.results)
+                {
+                    Park park = new Park();
+                    park.Latitude = result.geometry.location.lat;
+                    park.Longitude = result.geometry.location.lng;
+                    park.ParkName = result.name;
+                    parks.Add(park);
+                }
+                return View(parks);
             }
-            catch
-            {
-                return View();
-            }
-        }
+            return View();
+}
+
+// GET: Players/Delete/5
+public ActionResult Delete(int id)
+{
+    var player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
+
+    return View(player);
+}
+
+// POST: Players/Delete/5
+[HttpPost]
+public ActionResult Delete(int id, Player player)
+{
+    try
+    {
+        // TODO: Add delete logic here
+        player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
+        var userdelete = db.Users.SingleOrDefault(c => c.Id == player.ApplicationId);
+        player.ApplicationId = null;
+        db.Player.Remove(player);
+        db.Users.Remove(userdelete);
+        db.SaveChanges();
+        return RedirectToAction("Index");
+    }
+    catch
+    {
+        return View();
+    }
+}
     }
 }
