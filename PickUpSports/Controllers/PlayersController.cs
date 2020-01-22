@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 using PickUpSports.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 
@@ -38,7 +40,7 @@ namespace PickUpSports.Controllers
             Player player = new Player();
             var skilllevel = db.SkillLevel.Select(s => s.Level).ToList();
             ViewBag.SkillLevel = new SelectList(skilllevel);
-            var SportsInterest = db.Sport.Select(s=>s.SportName).ToList();
+            var SportsInterest = db.Sport.Select(s => s.SportName).ToList();
             ViewBag.SportsInterest = new SelectList(SportsInterest);
             return View(player);
         }
@@ -79,7 +81,7 @@ namespace PickUpSports.Controllers
         [HttpPost]
         public ActionResult Edit(int id, Player player)
         {
-            
+
             try
             {
                 // TODO: Add update logic here
@@ -87,7 +89,7 @@ namespace PickUpSports.Controllers
                 ViewBag.SportsInterest = new SelectList(SportsInterest);
                 var skilllevel = db.SkillLevel.Select(s => s.Level).ToList();
                 ViewBag.SkillLevel = new SelectList(skilllevel);
-                var playeredit = db.Player.Include(p=>p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
+                var playeredit = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
                 playeredit.FirstName = player.FirstName;
                 playeredit.LastName = player.LastName;
                 playeredit.PhoneNumber = player.PhoneNumber;
@@ -96,7 +98,7 @@ namespace PickUpSports.Controllers
                 playeredit.ApplicationUser.UserName = player.ApplicationUser.UserName;
                 playeredit.ApplicationUser.Email = player.ApplicationUser.Email;
                 db.SaveChanges();
-               
+
                 return RedirectToAction("Index");
             }
             catch
@@ -105,10 +107,34 @@ namespace PickUpSports.Controllers
             }
         }
 
+        public async System.Threading.Tasks.Task<ActionResult> ParkLocationsAsync(int id)
+        {
+            Player player = db.Player.Find(id);
+            List<Park> parks = new List<Park>();
+            string url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=park+in+" + player.ZipCode + "&key=" + GooglePlacesKey.Key;
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync(url);
+            string jsonResult = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                PlacesJSONResult postManJSON = JsonConvert.DeserializeObject<PlacesJSONResult>(jsonResult);
+                foreach (var result in postManJSON.results)
+                {
+                    Park park = new Park();
+                    park.Latitude = result.geometry.location.lat;
+                    park.Longitude = result.geometry.location.lng;
+                    park.ParkName = result.name;
+                    parks.Add(park);
+                }
+                return View(parks);
+            }
+            return View();
+        }
         // GET: Players/Delete/5
         public ActionResult Delete(int id)
         {
             var player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
+
             return View(player);
         }
 
@@ -119,7 +145,7 @@ namespace PickUpSports.Controllers
             try
             {
                 // TODO: Add delete logic here
-                player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();               
+                player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
                 var userdelete = db.Users.SingleOrDefault(c => c.Id == player.ApplicationId);
                 player.ApplicationId = null;
                 db.Player.Remove(player);

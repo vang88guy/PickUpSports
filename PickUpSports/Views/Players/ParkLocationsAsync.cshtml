@@ -1,0 +1,32 @@
+﻿@model IEnumerable<PickUpSports.Models.Park>
+
+@{
+    ViewBag.Title = "Nearby Parks";
+}
+
+<h2>Nearby Parks</h2>
+
+<p>
+    @Html.ActionLink("Create New Event", "Create", "Event")
+</p>
+<div id="map"></div>
+<script>
+    function initializeMap()
+    {
+        var map = new google.maps.Map(document.getElementById('map'), { zoom: 4 });
+        @foreach(var park in Model)
+        {
+            <text>
+            var location = { lat: @park.Latitude, lng: @park.Longitude};
+            var marker = new google.maps.Marker({
+            map: map,
+            position: location,
+            title: '@park.ParkName'
+            });
+            </text>
+        }
+    }
+</script>
+<script async defer
+        src= @Model.First().apiKeyString>
+</script>

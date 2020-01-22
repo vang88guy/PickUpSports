@@ -7,17 +7,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PickUpSports.Models
 {
-    public class Parks
+    public class Park
     { 
         [Key]        
         public int Id { get; set; }
-        [Required(ErrorMessage = "Park Name is required")]
         public string ParkName { get; set; }
-        [Required(ErrorMessage = "Zip Code is required")]
-        public string ZipCode { get; set; }
         public float Latitude { get; set; }
         public float Longitude { get; set; }
-       
+
+        public string apiKeyString = "https://maps.googleapis.com/maps/api/js?key=" + GoogleMapsKey.Key + "&callback=initializeMap";
     }
 
 

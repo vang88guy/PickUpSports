@@ -349,9 +349,7 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
-Web.config
 TwilioAPIKey.cs
-<<<<<<< HEAD
-Migrations
-=======
->>>>>>> acd2fe011999430c8ec3650f566981303e63405e
+Web.config
+GooglePlacesKey.cs
+GoogleMapsKey.cs

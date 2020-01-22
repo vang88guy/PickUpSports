@@ -197,25 +197,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001212154191_inital.cs" />
-    <Compile Include="Migrations\202001212154191_inital.Designer.cs">
-      <DependentUpon>202001212154191_inital.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001221313170_add current players to Event model.cs" />
-    <Compile Include="Migrations\202001221313170_add current players to Event model.Designer.cs">
-      <DependentUpon>202001221313170_add current players to Event model.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\googlePlacesJSON.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Parks.cs" />
+    <Compile Include="Models\Park.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\PlayerEvent.cs" />
     <Compile Include="Models\SkillLevel.cs" />
     <Compile Include="Models\Sport.cs" />
-    <Compile Include="Models\TwilioAPIKey.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -286,6 +278,7 @@
     <Content Include="Views\Events\Index.cshtml" />
     <Content Include="Views\Events\MyEvents.cshtml" />
     <Content Include="Views\Events\PlayerInterestEvents.cshtml" />
+    <Content Include="Views\Players\ParkLocationsAsync.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -305,12 +298,6 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001212154191_inital.resx">
-      <DependentUpon>202001212154191_inital.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001221313170_add current players to Event model.resx">
-      <DependentUpon>202001221313170_add current players to Event model.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

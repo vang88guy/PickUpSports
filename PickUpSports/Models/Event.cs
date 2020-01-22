@@ -36,13 +36,10 @@ namespace PickUpSports.Models
         [Display(Name ="Current Players")]
         public int CurrentPlayers { get; set; }
         [Display(Name = "Event Is Full")]
-        public bool IsFull { get; set; }
-       
+        public bool IsFull { get; set; }     
         [ForeignKey("Player")]
         public int PlayerId { get; set; }
         public Player Player { get; set; }
-        
-
     }
 
 }
