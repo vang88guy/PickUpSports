@@ -29,8 +29,8 @@ namespace PickUpSports.Controllers
         // GET: Players/Details/5
         public ActionResult Details()
         {
-            var userid = User.Identity.GetUserId();
-            var player = db.Player.Include(p => p.ApplicationUser).FirstOrDefault(p => p.ApplicationId == userid);
+            var userid = GetId();
+            var player = GetPlayerByAppId(userid);
             return View(player);
         }
 
@@ -53,7 +53,7 @@ namespace PickUpSports.Controllers
             {
                 // TODO: Add insert logic here
 
-                player.ApplicationId = User.Identity.GetUserId();
+                player.ApplicationId = GetId();
 
                 db.Player.Add(player);
                 db.SaveChanges();
@@ -69,7 +69,7 @@ namespace PickUpSports.Controllers
         // GET: Players/Edit/5
         public ActionResult Edit(int id)
         {
-            var player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
+            var player = GetPlayerByPlayerId(id);
             var skilllevel = db.SkillLevel.Select(s => s.Level).ToList();
             ViewBag.SkillLevel = new SelectList(skilllevel);
             var SportsInterest = db.Sport.Select(s => s.SportName).ToList();
@@ -89,7 +89,7 @@ namespace PickUpSports.Controllers
                 ViewBag.SportsInterest = new SelectList(SportsInterest);
                 var skilllevel = db.SkillLevel.Select(s => s.Level).ToList();
                 ViewBag.SkillLevel = new SelectList(skilllevel);
-                var playeredit = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
+                var playeredit = GetPlayerByPlayerId(id);
                 playeredit.FirstName = player.FirstName;
                 playeredit.LastName = player.LastName;
                 playeredit.PhoneNumber = player.PhoneNumber;
@@ -133,7 +133,7 @@ namespace PickUpSports.Controllers
         // GET: Players/Delete/5
         public ActionResult Delete(int id)
         {
-            var player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
+            var player = GetPlayerByPlayerId(id);
 
             return View(player);
         }
@@ -145,7 +145,7 @@ namespace PickUpSports.Controllers
             try
             {
                 // TODO: Add delete logic here
-                player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
+                player = GetPlayerByPlayerId(id);
                 var userdelete = db.Users.SingleOrDefault(c => c.Id == player.ApplicationId);
                 player.ApplicationId = null;
                 db.Player.Remove(player);
@@ -158,5 +158,22 @@ namespace PickUpSports.Controllers
                 return View();
             }
         }
+        public string GetId()
+        {
+            var userid = User.Identity.GetUserId();
+            return userid;
+        }
+
+        public Player GetPlayerByAppId(string userid)
+        {
+            var player = db.Player.Include(s => s.ApplicationUser).Where(p => p.ApplicationId == userid).FirstOrDefault();
+            return player;
+        }
+        public Player GetPlayerByPlayerId(int id)
+        {
+            var player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == id).FirstOrDefault();
+            return player;
+        }
+
     }
 }
