@@ -27,6 +27,7 @@ textarea {
    
 }
 
+<<<<<<< HEAD
 h1 {
     color: black;
     font-family: 'Trebuchet MS'
@@ -34,6 +35,10 @@ h1 {
 
 h2 {
     color:whitesmoke;
+=======
+h2{
+    color:#000000;
+>>>>>>> fde26f3c80d4e20c9ad7c9a608a71ba00f330995
     font-family:'Trebuchet MS'
 }
 
@@ -55,3 +60,32 @@ h2 {
 #map{
     height: 400px;
 }
+<<<<<<< HEAD
+=======
+
+.tHead {
+    font-family: 'Agency FB';
+    border-top-style: double;
+    border-bottom-style: double;
+}
+
+.PlayerIndex {
+    text-align: center;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    height: 100%;
+    color: #eee;
+    background-image:linear-gradient(black, gray);
+}
+
+.createBck{
+    /*background-color:darkgray;*/
+    background-position:bottom;
+    background-repeat:no-repeat;
+    
+}
+
+
+
+
+>>>>>>> fde26f3c80d4e20c9ad7c9a608a71ba00f330995
