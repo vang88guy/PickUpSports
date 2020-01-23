@@ -1,14 +1,12 @@
 ﻿@model IEnumerable<PickUpSports.Models.Event>
 
 @{
-    ViewBag.Title = "PlayerInterestEvents";
+    ViewBag.Title = "Events You May Be Like In Your Area";
 }
 
-<h2>PlayerInterestEvents</h2>
+<h3>Here are the events in your area</h3>
+<h3>today that you may be interested in.</h3>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
 
@@ -100,11 +98,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IsFull)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.EventId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.EventId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.EventId })
         </td>
     </tr>
 }

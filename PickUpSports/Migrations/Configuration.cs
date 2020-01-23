@@ -22,7 +22,7 @@ namespace PickUpSports.Migrations
             context.Sport.AddOrUpdate(
                 new Models.Sport { SportName = "Basketball" },
                 new Models.Sport { SportName = "Football" },
-                new Models.Sport { SportName = "Tennis", },
+                new Models.Sport { SportName = "Tennis" },
                 new Models.Sport { SportName = "Volleyball" },
                 new Models.Sport { SportName = "Soccer" });
             context.SkillLevel.AddOrUpdate(

@@ -1,69 +1,7 @@
-﻿@model IEnumerable<PickUpSports.Models.Player>
+﻿@model PickUpSports.Models.Player
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Home";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ZipCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SkillLevel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PlayerRating)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ApplicationId)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ZipCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SkillLevel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PlayerRating)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SportsInterest)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PlayerId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PlayerId }) |
-            @Html.ActionLink("Parks In My Zip Code", "ParkLocationsAsync", new { id=item.PlayerId })
-        </td>
-    </tr>
-}
-
-</table>
+<h1>Welcome @Model.FirstName @Model.LastName</h1>
