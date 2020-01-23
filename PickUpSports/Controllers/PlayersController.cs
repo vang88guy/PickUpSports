@@ -129,7 +129,7 @@ namespace PickUpSports.Controllers
                 return View(parks);
             }
             return View();
-        }
+        }  
         // GET: Players/Delete/5
         public ActionResult Delete(int id)
         {
