@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="HandheldFriendly" content="true">
+    <script src="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"></script>
+    @*<script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>*@
     @*<link rel="stylesheet" href="styles/normalize.css">*@
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <title>@ViewBag.Title - PickUp Sports</title>
@@ -32,22 +34,19 @@
                 <div class="collapse navbar-collapse" id="navbar-primary-collapse">
                     <ul class="nav navbar-nav">
                         @if (User.IsInRole("Player") == false)
-                         {
+                        {
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                         }
+                        }
                         @if (User.IsInRole("Player") == true)
-                         {
-
+                        {
+                            <li>@Html.ActionLink("Home", "Index", "Players")</li>
                             <li>@Html.ActionLink("Today's Events", "PlayerInterestEvents", "Events")</li>
                             <li>@Html.ActionLink("Player Details", "Details", "Players")</li>
                             <li>@Html.ActionLink("Create Event", "Create", "Events")</li>
-                            <li>@Html.ActionLink("My Events","MyEvents","Events")</li>
-
-                            <li>@Html.ActionLink("Home", "Index", "Players")</li>
+                            <li>@Html.ActionLink("My Events", "MyEvents", "Events")</li>
                             <li>@Html.ActionLink("Player Details", "Details", "Players")</li>
-                            <li>@Html.ActionLink("Create Event", "Create", "Event")</li>
                             <li>@Html.ActionLink("See Nearby Parks", "ParkLocationsAsync", "Players")</li>
-                         }
+                        }
                         <li>@Html.ActionLink("About", "About", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     </ul>
@@ -57,36 +56,6 @@
         </nav>
       
     </header>
-       <!-- header role="banner" -->
-        <!-- <div class="navbar navbar-inverse navbar-fixed-top">
-         <div class="container">
-             <div class="navbar-header">
-                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                 </button>
-                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-             </div>
-             <div class="navbar-collapse collapse">
-                 <ul class="nav navbar-nav">
-                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                     @if (User.IsInRole("Player") == true)
-                     {
-                         <li>@Html.ActionLink("Today's Events", "PlayerInterestEvents", "Events")</li>
-                         <li>@Html.ActionLink("Player Details", "Details", "Players")</li>
-                         <li>@Html.ActionLink("Create Event", "Create", "Events")</li>
-                     }
-                 </ul>
-                 @Html.Partial("_LoginPartial")
-             </div>
-         </div>
-     </div> 
-
-    </header><!-- header role="banner" -->
-
     <div class="container body-content">
         @RenderBody()
         <hr />

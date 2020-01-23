@@ -4,39 +4,43 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2  style="font-family:'Agency FB'; color:red" >Index</h2>
+<body class="PlayerIndex" background-image: linear-gradient(red, yellow);>
+
+</body>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table" style="border-color:dodgerblue">
     <tr>
-        <th>
+        <th class="tHead" style="border-color:dodgerblue" >
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
-        <th>
+        <th class="tHead" style="border-color:dodgerblue">
             @Html.DisplayNameFor(model => model.LastName)
         </th>
-        <th>
+        <th class="tHead" style="border-color:dodgerblue">
             @Html.DisplayNameFor(model => model.ZipCode)
         </th>
-        <th>
+        <th class="tHead" style="border-color:dodgerblue">
             @Html.DisplayNameFor(model => model.PhoneNumber)
         </th>
-        <th>
+        <th class="tHead" style="border-color:dodgerblue">
             @Html.DisplayNameFor(model => model.SkillLevel)
+            
         </th>
-        <th>
+        <th class="tHead" style="border-color:dodgerblue">
             @Html.DisplayNameFor(model => model.PlayerRating)
         </th>
-        <th>
+        <th class="tHead" style="border-color:dodgerblue">
             @Html.DisplayNameFor(model => model.ApplicationId)
         </th>
-        <th></th>
+        <th style="border-color:dodgerblue"></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+    <tr style="border-style:double; border-color:dodgerblue">
         <td>
             @Html.DisplayFor(modelItem => item.FirstName)
         </td>
@@ -58,10 +62,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.SportsInterest)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PlayerId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PlayerId }) |
-            @Html.ActionLink("Parks In My Zip Code", "ParkLocationsAsync", new { id=item.PlayerId })
+        <td style="border-top:double;border-top-color:dodgerblue">
+            @Html.ActionLink("Edit", "Edit", new { id=item.PlayerId, @style = "color:black" }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PlayerId, @style = "color:black" }) |
+            @Html.ActionLink("Parks In My Zip Code", "ParkLocationsAsync", new { id=item.PlayerId, @style = "color:black" })
         </td>
     </tr>
 }

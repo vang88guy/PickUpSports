@@ -200,6 +200,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\GoogleMapsKey.cs" />
     <Compile Include="Models\googlePlacesJSON.cs" />
     <Compile Include="Models\GooglePlacesKey.cs" />
     <Compile Include="Models\IdentityModels.cs" />
