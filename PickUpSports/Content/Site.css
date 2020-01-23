@@ -32,6 +32,7 @@ h2{
     font-family:'Trebuchet MS'
 }
 
+<<<<<<< HEAD
 #bckgrnd {
     padding-top: 70px;
     padding-bottom: 70px;
@@ -45,3 +46,8 @@ h2{
     font-family:'Agency FB';
     
 }
+=======
+#map{
+    height: 400px;
+}
+>>>>>>> 54ab4fb6e4a5dfeadd18d46c2a36636c0f3be8f2

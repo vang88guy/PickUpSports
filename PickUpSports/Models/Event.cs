@@ -33,6 +33,8 @@ namespace PickUpSports.Models
         public string TimeOfEvent { get; set; }
         [Display(Name = "Maximum Players")]
         public int MaximumPlayers { get; set; }
+        [Display(Name ="Current Players")]
+        public int CurrentPlayers { get; set; }
         [Display(Name = "Event Is Full")]
         public bool IsFull { get; set; }     
         [ForeignKey("Player")]
