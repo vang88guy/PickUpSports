@@ -109,3 +109,17 @@ h2 {
     color:red;
 }
 
+.parkback {
+   
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+}
+
+.contacttxt {
+    font-family: 'Agency FB';
+}
+.contactbck {
+    background-image: linear-gradient(black, gray);
+}

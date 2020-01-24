@@ -36,12 +36,12 @@
                         }
                         @if (User.IsInRole("Player") == true)
                         {
-                            <li>@Html.ActionLink("Home", "Index", "Players")</li>
+                            <li>@Html.ActionLink("Home/Parks", "ParkLocationsAsync", "Players")</li>
                             <li>@Html.ActionLink("Today's Events", "PlayerInterestEvents", "Events")</li>
                             <li>@Html.ActionLink("My Info", "Details", "Players")</li>
                             <li>@Html.ActionLink("Create Event", "Create", "Events")</li>
                             <li>@Html.ActionLink("My Events", "MyEvents", "Events")</li>
-                            <li>@Html.ActionLink("See Nearby Parks", "ParkLocationsAsync", "Players")</li>
+                            @*<li>@Html.ActionLink("See Nearby Parks", "ParkLocationsAsync", "Players")</li>*@
                         }
 
                         <li>@Html.ActionLink("About", "About", "Home")</li>
