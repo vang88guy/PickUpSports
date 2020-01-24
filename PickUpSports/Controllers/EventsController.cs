@@ -43,8 +43,9 @@ namespace PickUpSports.Controllers
                 string datenow = System.DateTime.Now.ToString("MM/dd/yyyy");
                 var userid = GetAppId();
                 var player = GetPlayerByAppId(userid);
-                var events = db.Event.Include(e => e.Player).Include(e => e.Player.ApplicationUser).Where(e => e.SportsName == player.SportsInterest && e.ZipCode == player.ZipCode && e.SkillLevel == player.SkillLevel && e.DateOfEvent == datenow && e.IsFull == false && e.PlayerId != player.PlayerId).ToList();
-                return View(events);
+                //var events = db.Event.Include(e => e.Player).Include(e => e.Player.ApplicationUser).Where(e => e.SportsName == player.SportsInterest && e.ZipCode == player.ZipCode && e.SkillLevel == player.SkillLevel && e.DateOfEvent == datenow && e.IsFull == false && e.PlayerId != player.PlayerId).ToList();
+                var eventsnow = db.PlayerEvent.Include(e=>e.Event).Include(e=>e.Player).Include(e=>e.Player.ApplicationUser).Where(e=>e.PlayerId != player.PlayerId).Select(e=>e.Event).Where(e => e.SportsName == player.SportsInterest && e.ZipCode == player.ZipCode && e.SkillLevel == player.SkillLevel && e.DateOfEvent == datenow && e.IsFull == false && e.PlayerId != player.PlayerId).ToList();
+                return View(eventsnow);
             }
             catch (Exception)
             {

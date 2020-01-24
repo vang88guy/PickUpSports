@@ -4,10 +4,14 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
+<h2>🅟🅡🅞🅕🅘🅛🅔</h2>
+<body background="~/Content/try.jpg">
+
+<h1>Details</h1>
+
+</body>
 <div>
-    <h4>Player</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -15,7 +19,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FirstName)
+            @Html.DisplayFor(model => model.FirstName, new { @style = "color:white" } )
         </dd>
 
         <dt>
@@ -23,7 +27,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LastName)
+            @Html.DisplayFor(model => model.LastName, new { @style = "color:white" })
         </dd>
 
         <dt>
@@ -31,7 +35,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ZipCode)
+            @Html.DisplayFor(model => model.ZipCode, new { @style = "color:white" })
         </dd>
 
         <dt>
@@ -39,7 +43,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
+            @Html.DisplayFor(model => model.PhoneNumber, new { @style = "color:white" })
         </dd>
 
         <dt>
@@ -47,7 +51,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SkillLevel)
+            @Html.DisplayFor(model => model.SkillLevel, new { @style = "color:white" })
         </dd>
 
         <dt>
@@ -55,7 +59,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PlayerRating)
+            @Html.DisplayFor(model => model.PlayerRating, new { @style = "color:white" })
         </dd>
 
         <dt>
@@ -63,11 +67,11 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SportsInterest)
+            @Html.DisplayFor(model => model.SportsInterest, new { @style = "color:white" })
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.PlayerId })    
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PlayerId })
 </p>

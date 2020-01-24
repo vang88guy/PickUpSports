@@ -22,9 +22,8 @@ namespace PickUpSports.Controllers
         
         public SMSController()
         {
-            var phonenumbesrs = PhoneNumbers.PlayersPhoneNumbers;
+            db = new ApplicationDbContext();
         }
-        //sends an automated message to phone
         
         public ActionResult SendSMS()
         {

@@ -27,12 +27,17 @@ textarea {
    
 }
 
-h2{
+
+h1 {
+    color: black;
+    font-family: 'Trebuchet MS'
+}
+
+h2 {
     color:whitesmoke;
     font-family:'Trebuchet MS'
 }
 
-<<<<<<< HEAD
 #bckgrnd {
     padding-top: 70px;
     padding-bottom: 70px;
@@ -41,13 +46,80 @@ h2{
 .font1{
     font-family:'Agency FB';
 }
+
 .intro{
     font-size:xx-large;
     font-family:'Agency FB';
     
 }
-=======
+
 #map{
     height: 400px;
 }
->>>>>>> 54ab4fb6e4a5dfeadd18d46c2a36636c0f3be8f2
+
+.tHead {
+    font-family: 'Agency FB';
+    border-top-style: double;
+    border-bottom-style: double;
+}
+
+.PlayerIndex {
+    text-align: center;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    height: 100%;
+    color: #eee;
+    background-image:linear-gradient(black, gray);
+}
+
+.createBck {
+    /*background-color:darkgray;*/
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+}
+
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
+
+.aboutcolor {
+    background-image: linear-gradient(black, gray);
+}
+
+#titlecol{
+    font-family:'Agency FB';
+}
+
+.eventback {
+    background-image: linear-gradient(black, gray);
+}
+.interestback {
+    background-image: linear-gradient(black, gray);
+}
+
+.manageback {
+    background-image: linear-gradient(black, gray);
+}
+.managetxt{
+    font-family:'Agency FB';
+    color:red;
+}
+
+.parkback {
+   
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+}
+
+.contacttxt {
+    font-family: 'Agency FB';
+}
+.contactbck {
+    background-image: linear-gradient(black, gray);
+}

@@ -22,8 +22,9 @@ namespace PickUpSports.Controllers
         // GET: Players
         public ActionResult Index()
         {
-            var players = db.Player.Include(p => p.ApplicationUser).ToList();
-            return View(players);
+            var userId = GetId();
+            var player = GetPlayerByAppId(userId);
+            return View(player);
         }
 
         // GET: Players/Details/5
@@ -107,9 +108,10 @@ namespace PickUpSports.Controllers
             }
         }
 
-        public async System.Threading.Tasks.Task<ActionResult> ParkLocationsAsync(int id)
+        public async System.Threading.Tasks.Task<ActionResult> ParkLocationsAsync()
         {
-            Player player = db.Player.Find(id);
+            var id = GetId();
+            Player player = GetPlayerByAppId(id);
             List<Park> parks = new List<Park>();
             string url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=park+in+" + player.ZipCode + "&key=" + GooglePlacesKey.Key;
             HttpClient client = new HttpClient();
@@ -129,7 +131,7 @@ namespace PickUpSports.Controllers
                 return View(parks);
             }
             return View();
-        }
+        }  
         // GET: Players/Delete/5
         public ActionResult Delete(int id)
         {

@@ -1,15 +1,19 @@
 ﻿@model IEnumerable<PickUpSports.Models.Event>
 @using Microsoft.AspNet.Identity;
 @{
-    ViewBag.Title = "MyEvents";
+    ViewBag.Title = "Created/Joined Events";
 }
 
-<h2>MyEvents</h2>
+<h2><a href="https://fontmeme.com/fonts/college-font/"><img src="https://fontmeme.com/permalink/200124/c51ab5645b83a49dfcaaedb03e030ef6.png" alt="college-font" border="0"></a></h2>
+<body class="eventback">
 
+<h1>My Events</h1>
+
+</body>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table" style="border-color:dodgerblue">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.EventName)
