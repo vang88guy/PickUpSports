@@ -16,7 +16,7 @@
 </head>
 <body>
     <header>
-        <img class="img-responsive" src="~/Content/pusheaderFinalpng.png" alt="PickUp sports logo">
+        <img class="img-responsive" src="~/Content/pusheaderFinal.png" alt="PickUp sports logo">
         <nav id="navbar-primary" class="navbar navbar-default" role="navigation">
 
 
@@ -44,11 +44,9 @@
                             <li>@Html.ActionLink("Player Details", "Details", "Players")</li>
                             <li>@Html.ActionLink("Create Event", "Create", "Events")</li>
                             <li>@Html.ActionLink("My Events", "MyEvents", "Events")</li>
-                            <li>@Html.ActionLink("Player Details", "Details", "Players")</li>
                             <li>@Html.ActionLink("See Nearby Parks", "ParkLocationsAsync", "Players")</li>
                         }
                         <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     </ul>
                     @Html.Partial("_LoginPartial")
                 </div><!-- /.navbar-collapse -->

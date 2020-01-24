@@ -65,13 +65,39 @@ h2{
     background-image:linear-gradient(black, gray);
 }
 
-.createBck{
+.createBck {
     /*background-color:darkgray;*/
-    background-position:bottom;
-    background-repeat:no-repeat;
-    
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
 }
 
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
 
+.aboutcolor {
+    background-image: linear-gradient(black, gray);
+}
 
+#titlecol{
+    font-family:'Agency FB';
+}
 
+.eventback {
+    background-image: linear-gradient(black, gray);
+}
+.interestback {
+    background-image: linear-gradient(black, gray);
+}
+
+.manageback {
+    background-image: linear-gradient(black, gray);
+}
+.managetxt{
+    font-family:'Agency FB';
+    color:red;
+}

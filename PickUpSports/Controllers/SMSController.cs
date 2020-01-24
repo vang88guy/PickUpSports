@@ -22,7 +22,7 @@ namespace PickUpSports.Controllers
         public Player player;
         public SMSController()
         {
-            ApplicationDbContext db = new ApplicationDbContext();
+            db = new ApplicationDbContext();
         }
         //sends an automated message to phone
         
