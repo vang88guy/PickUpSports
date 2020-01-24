@@ -1,15 +1,15 @@
-﻿@model IEnumerable<PickUpSports.Models.Player>
+﻿@model PickUpSports.Models.Player
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Home";
 }
 
-<h2  style="font-family:'Agency FB'; color:red" >Index</h2>
+<h1 style="font-family:'Agency FB'; color:red">Welcome @Model.FirstName @Model.LastName</h1>
 <body class="PlayerIndex" background-image: linear-gradient(red, yellow);>
 
 </body>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table" style="border-color:dodgerblue">
@@ -70,4 +70,4 @@
     </tr>
 }
 
-</table>
+</table>*@

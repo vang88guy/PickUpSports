@@ -1,15 +1,12 @@
 ﻿@model PickUpSports.Models.Player
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Enter Your Information";
 }
 
-<h2>Create</h2>
+<h1>@ViewBag.Title</h1>
+
 <body>
-   
-
-
-
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()

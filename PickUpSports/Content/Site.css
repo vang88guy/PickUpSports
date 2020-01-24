@@ -27,8 +27,14 @@ textarea {
    
 }
 
-h2{
-    color:#000000;
+
+h1 {
+    color: black;
+    font-family: 'Trebuchet MS'
+}
+
+h2 {
+    color:whitesmoke;
     font-family:'Trebuchet MS'
 }
 
@@ -40,6 +46,7 @@ h2{
 .font1{
     font-family:'Agency FB';
 }
+
 .intro{
     font-size:xx-large;
     font-family:'Agency FB';
@@ -101,3 +108,4 @@ h2{
     font-family:'Agency FB';
     color:red;
 }
+
