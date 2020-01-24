@@ -7,21 +7,31 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+using Twilio.Types;
+using Twilio.TwiML;
+using Twilio.AspNet.Mvc;
+using static PickUpSports.Models.TwilioAPIKey;
+using System.Windows;
 
 namespace PickUpSports.Controllers
 {
     public class EventsController : Controller
+    
     {
         ApplicationDbContext db;
+        SMSController SMS;
         public EventsController()
         {
+            SMS = new SMSController();
             db = new ApplicationDbContext();
         }
         
         // GET: Events
         public ActionResult Index()
         {           
-            var events = db.Event.Include(e => e.Player).Include(e=>e.Player.ApplicationUser);
+            var events = db.Event.Include(e => e.Player).Include(e=>e.Player.ApplicationUser).ToList();
             return View(events);
         }
 
@@ -30,10 +40,10 @@ namespace PickUpSports.Controllers
         {
             try
             {
-                string datenow = System.DateTime.Now.ToString("yyyy-MM-dd");
-                var userid = GetId();
-                var player = GetPlayer(userid);
-                var events = db.Event.Include(e => e.Player).Include(e => e.Player.ApplicationUser).Where(e => e.SportsName == player.SportsInterest && e.ZipCode == player.ZipCode && e.SkillLevel == player.SkillLevel && e.DateOfEvent == datenow).ToList();
+                string datenow = System.DateTime.Now.ToString("MM/dd/yyyy");
+                var userid = GetAppId();
+                var player = GetPlayerByAppId(userid);
+                var events = db.Event.Include(e => e.Player).Include(e => e.Player.ApplicationUser).Where(e => e.SportsName == player.SportsInterest && e.ZipCode == player.ZipCode && e.SkillLevel == player.SkillLevel && e.DateOfEvent == datenow && e.IsFull == false && e.PlayerId != player.PlayerId).ToList();
                 return View(events);
             }
             catch (Exception)
@@ -46,12 +56,15 @@ namespace PickUpSports.Controllers
 
         public ActionResult MyEvents() 
         {
+            var userid = GetAppId();
+            var player = GetPlayerByAppId(userid);
+            ViewBag.UserId = player.PlayerId;
             try
-            {
-                var userid = GetId();
-                var player = GetPlayer(userid);
+            {                
+                var eventsjoined = db.PlayerEvent.Include(e => e.Player).Include(e => e.Event).Where(e => e.PlayerId == player.PlayerId && e.Event.PlayerId != player.PlayerId).Select(e => e.Event).ToList();
                 var myevents = db.Event.Include(e => e.Player).Include(e => e.Player.ApplicationUser).Where(e => e.PlayerId == player.PlayerId).ToList();
-                return View(myevents);
+                var allevents = myevents.Concat(eventsjoined);
+                return View(allevents.ToList());
             }
             catch (Exception)
             {
@@ -63,20 +76,47 @@ namespace PickUpSports.Controllers
         //Join Event
         public ActionResult JoinEvent(int id) 
         {
-
-            return View();
+            var eventjoin = GetEventById(id);
+            return View(eventjoin);
         }
         [HttpPost]
         public ActionResult JoinEvent(int id, Event joinevent)
         {
-
-            return View();
+            try
+            {
+                var userid = GetAppId();
+                var player = GetPlayerByAppId(userid);
+                var eventnow = GetEventById(id);
+                if (eventnow.IsFull == false && eventnow.CurrentPlayers != eventnow.MaximumPlayers)
+                {
+                    eventnow.CurrentPlayers += 1;
+                    if (eventnow.CurrentPlayers == eventnow.MaximumPlayers)
+                    {
+                        eventnow.IsFull = true;
+                    }
+                    PlayerEvent playerEvent = new PlayerEvent();
+                    playerEvent.PlayerId = player.PlayerId;
+                    playerEvent.EventId = eventnow.EventId;
+                    db.PlayerEvent.Add(playerEvent);
+                    db.SaveChanges();
+                    return RedirectToAction( "PlayerInerestEvents", "Event");
+                }
+                else
+                {
+                    MessageBox.Show("Sorry, Event is full");
+                    return RedirectToAction("PlayerInerestEvents", "Event");
+                }               
+            }
+            catch (Exception)
+            {
+                return View();
+            }
         }
 
         // GET: Events/Details/5
         public ActionResult Details(int id)
         {
-            var eventone = db.Event.Include(e => e.Player).FirstOrDefault(e=>e.EventId == id);
+            var eventone = GetEventById(id);
             return View(eventone);
         }
 
@@ -102,32 +142,38 @@ namespace PickUpSports.Controllers
                 ViewBag.SkillLevel = new SelectList(skilllevel);
                 var SportsName = db.Sport.Select(s => s.SportName).ToList();
                 ViewBag.SportsName = new SelectList(SportsName);
-                var userid = GetId();
-                var player = GetPlayer(userid);
+                var userid = GetAppId();
+                var player = GetPlayerByAppId(userid);
                 eventone.PlayerRating = player.PlayerRating;
                 eventone.PlayerId = player.PlayerId;
-                string date = eventone.DateOfEvent;
-                DateTime dateformat = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-                string dateofevent = dateformat.ToString("MM/dd/yyyy");
-                string time = eventone.TimeOfEvent;
-                DateTime timeformat = DateTime.ParseExact(time, "HH:mm", CultureInfo.InvariantCulture);
-                string timeofevent = timeformat.ToString("h:mm tt");
+                string dateofevent = GetDateFormat(eventone.DateOfEvent);
+                string timeofevent = GetTimeFormat(eventone.TimeOfEvent);
                 eventone.TimeOfEvent = timeofevent;
                 eventone.DateOfEvent = dateofevent;
                 db.Event.Add(eventone);
+                PhoneNumbers.PlayersPhoneNumbers = db.Player.Include(p => p.ApplicationUser).Where(p => p.SportsInterest == eventone.SportsName && p.PlayerId != eventone.PlayerId).Select(p => p.PhoneNumber).ToList();
                 db.SaveChanges();
+                var eventid = db.Event.Include(e => e.Player).Include(e => e.Player.ApplicationUser).Where(e => e.EventName == eventone.EventName).Select(e => e.EventId).FirstOrDefault();
+                PlayerEvent playerEvent = new PlayerEvent();
+                playerEvent.PlayerId = player.PlayerId;
+                playerEvent.EventId = eventid;
+                db.PlayerEvent.Add(playerEvent);
+                db.SaveChanges();
+                SMS.SendSMSToPlayers();
+
                 return RedirectToAction("Details","Players");
             }
             catch
             {
-                return View();
+                Redirect("https://localhost:44357/sms/sendsms");
+                return RedirectToAction("Details", "Players");
             }
         }
 
         // GET: Events/Edit/5
         public ActionResult Edit(int id)
         {
-            var eventedit = db.Event.Include(e => e.Player).FirstOrDefault(e => e.EventId == id);
+            var eventedit = GetEventById(id);
             var skilllevel = db.SkillLevel.Select(s => s.Level).ToList();
             ViewBag.SkillLevel = new SelectList(skilllevel);
             var SportsName = db.Sport.Select(s => s.SportName).ToList();
@@ -163,7 +209,7 @@ namespace PickUpSports.Controllers
         // GET: Events/Delete/5
         public ActionResult Delete(int id)
         {
-            var eventdelete = db.Event.Include(e => e.Player).FirstOrDefault(e => e.EventId == id);
+            var eventdelete = GetEventById(id);
             return View(eventdelete);
         }
 
@@ -174,7 +220,7 @@ namespace PickUpSports.Controllers
             try
             {
                 // TODO: Add delete logic here
-                eventdelete = db.Event.Include(e => e.Player).FirstOrDefault(e => e.EventId == id);
+                eventdelete = GetEventById(id);
                 eventdelete.PlayerId = 0;
                 db.Event.Remove(eventdelete);
                 db.SaveChanges();
@@ -187,16 +233,33 @@ namespace PickUpSports.Controllers
             }
         }
 
-        public string GetId()
+        public string GetAppId()
         {
             var userid = User.Identity.GetUserId();
             return userid;
         }
 
-        public Player GetPlayer(string userid)
+        public Player GetPlayerByAppId(string userid)
         {
             var player = db.Player.Include(s => s.ApplicationUser).Where(p => p.ApplicationId == userid).FirstOrDefault();
             return player;
+        }
+        public Event GetEventById(int id) 
+        {
+            var eventnow = db.Event.Include(e => e.Player).Include(e=>e.Player.ApplicationUser).FirstOrDefault(e => e.EventId == id);
+            return eventnow;
+        }
+        public string GetDateFormat(string date) 
+        {
+            DateTime dateformat = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            string dateofevent = dateformat.ToString("MM/dd/yyyy");
+            return dateofevent;
+        }
+        public string GetTimeFormat(string time) 
+        {           
+            DateTime timeformat = DateTime.ParseExact(time, "HH:mm", CultureInfo.InvariantCulture);
+            string timeofevent = timeformat.ToString("h:mm tt");
+            return timeofevent;
         }
     }
 }

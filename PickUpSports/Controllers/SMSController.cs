@@ -19,10 +19,10 @@ namespace PickUpSports.Controllers
     public class SMSController : TwilioController
     {
         public ApplicationDbContext db;
-        public Player player;
+        
         public SMSController()
         {
-            ApplicationDbContext db = new ApplicationDbContext();
+            var phonenumbesrs = PhoneNumbers.PlayersPhoneNumbers;
         }
         //sends an automated message to phone
         
@@ -31,7 +31,6 @@ namespace PickUpSports.Controllers
             var accountSid = TwilioAcct;
             var authToken = TwilioToken;
             TwilioClient.Init(accountSid, authToken);
-
             
             var to = new PhoneNumber("+19202542672");
             var from = new PhoneNumber("+12562420890");
@@ -41,8 +40,31 @@ namespace PickUpSports.Controllers
                 from: from,
                 body: "An event in your interest has been created. Open the app to view the event.");
             return Content(message.Sid);
+
+
         }
-    
+        public void SendSMSToPlayers() 
+        {
+            var accountSid = TwilioAcct;
+            var authToken = TwilioToken;
+            TwilioClient.Init(accountSid, authToken);
+
+            var phonenumbers = PhoneNumbers.PlayersPhoneNumbers;
+
+            foreach (var number in phonenumbers)
+            {
+                var message = MessageResource.Create(
+                    body: "An event in your interest has been created. Open the app to view the event.",
+                    from: new Twilio.Types.PhoneNumber("+12562420890"),
+                    to: new Twilio.Types.PhoneNumber(number)
+                );
+
+                Console.WriteLine($"Message to {number} has been {message.Status}.");
+                Content(message.Sid);
+                
+            }
+            
+        }
     
         public ActionResult ReceiveSMS()
         {

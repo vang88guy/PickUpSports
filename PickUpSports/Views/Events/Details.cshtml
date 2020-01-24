@@ -1,0 +1,130 @@
+﻿@model PickUpSports.Models.Event
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Event</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Player.ApplicationUser.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Player.ApplicationUser.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SportsName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SportsName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StreetAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StreetAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ZipCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkillLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkillLevel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerRating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlayerRating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfEvent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfEvent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeOfEvent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeOfEvent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaximumPlayers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaximumPlayers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentPlayers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentPlayers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsFull)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsFull)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EventId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
