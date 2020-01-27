@@ -22,7 +22,7 @@ namespace PickUpSports.Models
         [Display(Name = "Skill Level")]
         public int SkillLevel { get; set; }
         [Display(Name = "Player Rating")]
-        public int PlayerRating { get; set; }      
+        public double PlayerRating { get; set; }      
         [Display(Name = "Sport Interest")]
         public string SportsInterest { get; set; }
         [ForeignKey("ApplicationUser")]

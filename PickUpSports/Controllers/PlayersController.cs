@@ -22,7 +22,7 @@ namespace PickUpSports.Controllers
         // GET: Players
         public ActionResult Index()
         {
-            var userId = GetId();
+            var userId = GetAppId();
             var player = GetPlayerByAppId(userId);
             return View(player);
         }
@@ -30,7 +30,7 @@ namespace PickUpSports.Controllers
         // GET: Players/Details/5
         public ActionResult Details()
         {
-            var userid = GetId();
+            var userid = GetAppId();
             var player = GetPlayerByAppId(userid);
             return View(player);
         }
@@ -54,7 +54,7 @@ namespace PickUpSports.Controllers
             {
                 // TODO: Add insert logic here
 
-                player.ApplicationId = GetId();
+                player.ApplicationId = GetAppId();
 
                 db.Player.Add(player);
                 db.SaveChanges();
@@ -110,7 +110,7 @@ namespace PickUpSports.Controllers
 
         public async System.Threading.Tasks.Task<ActionResult> ParkLocationsAsync()
         {
-            var id = GetId();
+            var id = GetAppId();
             Player player = GetPlayerByAppId(id);
             List<Park> parks = new List<Park>();
             string url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=park+in+" + player.ZipCode + "&key=" + GooglePlacesKey.Key;
@@ -160,7 +160,63 @@ namespace PickUpSports.Controllers
                 return View();
             }
         }
-        public string GetId()
+
+        public ActionResult RatePlayer()
+        {
+            var PlayerRating = db.SkillLevel.Select(s => s.Level).ToList();
+            ViewBag.PlayerRating = new SelectList(PlayerRating);
+            var userid = GetAppId();
+            var player = GetPlayerByAppId(userid);
+            string yesterday = DateTime.Today.AddDays(-1).ToString("MM/dd/yyyy");
+            var eventscompleted = db.Event.Include(e => e.Player).Where(e => e.DateOfEvent == yesterday).ToList();
+            List<Player> players = new List<Player>();
+
+            foreach (var item in eventscompleted)
+            {
+                var playersforevent = db.PlayerEvent.Include(p => p.Player).Include(p => p.Event).Where(p => p.EventId == item.EventId && p.PlayerId != player.PlayerId).Select(p => p.Player).ToList();
+                players.Concat(playersforevent);
+            }
+            if (players.Count == 0)
+            {
+                return RedirectToAction("PlayerInterestEvents", "Events");
+            }
+            else
+            {
+                return View(players);
+            }
+
+        }
+        [HttpPost]
+        public ActionResult RatePlayer(List<Player> players)
+        {
+            try
+            {
+                foreach (var item in players)
+                {
+                    var player = db.Player.Include(p => p.ApplicationUser).Where(p => p.PlayerId == item.PlayerId).FirstOrDefault();
+                    if (player.PlayerRating == 0)
+                    {
+                        player.PlayerRating += item.PlayerRating;
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        player.PlayerRating = Math.Round(((player.PlayerRating + item.PlayerRating) / 2), 2);
+                        db.SaveChanges();
+                    }
+                }
+                return RedirectToAction("PlayerInterestEvents", "Events");
+            }
+            catch (Exception)
+            {
+
+                return RedirectToAction("PlayerInterestEvents", "Events");
+            }
+
+
+        }
+
+        public string GetAppId()
         {
             var userid = User.Identity.GetUserId();
             return userid;

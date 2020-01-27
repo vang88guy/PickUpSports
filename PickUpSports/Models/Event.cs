@@ -26,7 +26,7 @@ namespace PickUpSports.Models
         [Display(Name = "Skill Level")]
         public int SkillLevel { get; set; }
         [Display(Name = "Player Rating")]
-        public int PlayerRating { get; set; }
+        public double PlayerRating { get; set; }
         [Display(Name = "Date")]
         public string DateOfEvent { get; set; }
         [Display(Name = "Time")]
@@ -36,7 +36,11 @@ namespace PickUpSports.Models
         [Display(Name ="Current Players")]
         public int CurrentPlayers { get; set; }
         [Display(Name = "Event Is Full")]
-        public bool IsFull { get; set; }     
+        public bool IsFull { get; set; }
+        public float Latitude { get; set; }
+        public float Longitude { get; set; }
+
+        public string apiKeyString = "https://maps.googleapis.com/maps/api/js?key=" + GoogleMapsKey.Key + "&callback=initializeMap";
         [ForeignKey("Player")]
         public int PlayerId { get; set; }
         public Player Player { get; set; }
