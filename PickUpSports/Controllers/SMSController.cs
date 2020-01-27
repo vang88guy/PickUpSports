@@ -33,7 +33,7 @@ namespace PickUpSports.Controllers
             TwilioClient.Init(accountSid, authToken);
 
             
-            var to = new PhoneNumber("+19202542672");
+            var to = new PhoneNumber(" +19202542672");
             var from = new PhoneNumber("+12562420890");
 
             var message = MessageResource.Create(
