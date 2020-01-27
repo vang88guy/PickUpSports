@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<PickUpSports.Models.Event>
-
+@using Microsoft.AspNet.Identity;
 @{
     ViewBag.Title = "Created/Joined Events";
 }
@@ -105,9 +105,12 @@
             @Html.DisplayFor(modelItem => item.IsFull)
         </td>       
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.EventId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.EventId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.EventId })
+            @if (ViewBag.UserId == item.PlayerId)
+            {
+                @Html.ActionLink("Edit ", "Edit", new { id = item.EventId })
+                @Html.ActionLink(" Delete ", "Delete", new { id = item.EventId }) 
+            }
+            @Html.ActionLink(" Details", "Details", new { id = item.EventId }) 
         </td>
     </tr>
 }

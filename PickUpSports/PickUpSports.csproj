@@ -206,6 +206,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Park.cs" />
+    <Compile Include="Models\PhoneNumbers.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\PlayerEvent.cs" />
     <Compile Include="Models\SkillLevel.cs" />
@@ -282,6 +283,8 @@
     <Content Include="Views\Events\MyEvents.cshtml" />
     <Content Include="Views\Events\PlayerInterestEvents.cshtml" />
     <Content Include="Views\Players\ParkLocationsAsync.cshtml" />
+    <Content Include="Views\Events\JoinEvent.cshtml" />
+    <Content Include="Views\Events\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

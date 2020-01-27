@@ -107,6 +107,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.IsFull)
         </td>
+        <td>          
+            @Html.ActionLink("Join Event", "JoinEvent", new { id=item.EventId }) 
+        </td>
     </tr>
 }
 
