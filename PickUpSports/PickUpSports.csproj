@@ -285,6 +285,7 @@
     <Content Include="Views\Players\ParkLocationsAsync.cshtml" />
     <Content Include="Views\Events\JoinEvent.cshtml" />
     <Content Include="Views\Events\Details.cshtml" />
+    <Content Include="Views\Players\RatePlayer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,11 +14,13 @@ using Twilio.TwiML;
 using Twilio.AspNet.Mvc;
 using static PickUpSports.Models.TwilioAPIKey;
 using System.Windows;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace PickUpSports.Controllers
 {
     public class EventsController : Controller
-    
+
     {
         ApplicationDbContext db;
         SMSController SMS;
@@ -27,41 +29,41 @@ namespace PickUpSports.Controllers
             SMS = new SMSController();
             db = new ApplicationDbContext();
         }
-        
+
         // GET: Events
         public ActionResult Index()
-        {           
-            var events = db.Event.Include(e => e.Player).Include(e=>e.Player.ApplicationUser).ToList();
+        {
+            var events = db.Event.Include(e => e.Player).Include(e => e.Player.ApplicationUser).ToList();
             return View(events);
         }
 
         // Get Events that Player is interested in
-        public ActionResult PlayerInterestEvents() 
-        {
-            try
-            {
-                string datenow = System.DateTime.Now.ToString("MM/dd/yyyy");
-                var userid = GetAppId();
-                var player = GetPlayerByAppId(userid);
-                //var events = db.Event.Include(e => e.Player).Include(e => e.Player.ApplicationUser).Where(e => e.SportsName == player.SportsInterest && e.ZipCode == player.ZipCode && e.SkillLevel == player.SkillLevel && e.DateOfEvent == datenow && e.IsFull == false && e.PlayerId != player.PlayerId).ToList();
-                var eventsnow = db.PlayerEvent.Include(e=>e.Event).Include(e=>e.Player).Include(e=>e.Player.ApplicationUser).Where(e=>e.PlayerId != player.PlayerId).Select(e=>e.Event).Where(e => e.SportsName == player.SportsInterest && e.ZipCode == player.ZipCode && e.SkillLevel == player.SkillLevel && e.DateOfEvent == datenow && e.IsFull == false && e.PlayerId != player.PlayerId).ToList();
-                return View(eventsnow);
-            }
-            catch (Exception)
-            {
-                return View();
-            }           
-        }       
+        //public ActionResult PlayerInterestEvents12()
+        //{
+        //    try
+        //    {
+        //        string datenow = System.DateTime.Now.ToString("MM/dd/yyyy");
+        //        var userid = GetAppId();
+        //        var player = GetPlayerByAppId(userid);
+        //        var events = db.Event.Include(e => e.Player).Include(e => e.Player.ApplicationUser).Where(e => e.SportsName == player.SportsInterest && e.ZipCode == player.ZipCode && e.SkillLevel == player.SkillLevel && e.DateOfEvent == datenow && e.IsFull == false && e.PlayerId != player.PlayerId).ToList();
+        //        var eventsnow = db.PlayerEvent.Include(e => e.Event).Include(e => e.Player).Include(e => e.Player.ApplicationUser).Where(e => e.PlayerId != player.PlayerId).Select(e => e.Event).Where(e => e.SportsName == player.SportsInterest && e.ZipCode == player.ZipCode && e.SkillLevel == player.SkillLevel && e.DateOfEvent == datenow && e.IsFull == false && e.PlayerId != player.PlayerId).Include(e => e.Player).Include(e => e.Player.ApplicationUser).ToList();
+        //        return View(eventsnow);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return View();
+        //    }
+        //}
 
         //Get Events that player created
 
-        public ActionResult MyEvents() 
+        public ActionResult MyEvents()
         {
             var userid = GetAppId();
             var player = GetPlayerByAppId(userid);
             ViewBag.UserId = player.PlayerId;
             try
-            {                
+            {
                 var eventsjoined = db.PlayerEvent.Include(e => e.Player).Include(e => e.Event).Where(e => e.PlayerId == player.PlayerId && e.Event.PlayerId != player.PlayerId).Select(e => e.Event).ToList();
                 var myevents = db.Event.Include(e => e.Player).Include(e => e.Player.ApplicationUser).Where(e => e.PlayerId == player.PlayerId).ToList();
                 var allevents = myevents.Concat(eventsjoined);
@@ -71,11 +73,11 @@ namespace PickUpSports.Controllers
             {
                 return View();
             }
-            
+
         }
 
         //Join Event
-        public ActionResult JoinEvent(int id) 
+        public ActionResult JoinEvent(int id)
         {
             var eventjoin = GetEventById(id);
             return View(eventjoin);
@@ -100,13 +102,13 @@ namespace PickUpSports.Controllers
                     playerEvent.EventId = eventnow.EventId;
                     db.PlayerEvent.Add(playerEvent);
                     db.SaveChanges();
-                    return RedirectToAction( "PlayerInerestEvents", "Event");
+                    return RedirectToAction("PlayerInterestEvents", "Events");
                 }
                 else
                 {
                     MessageBox.Show("Sorry, Event is full");
-                    return RedirectToAction("PlayerInerestEvents", "Event");
-                }               
+                    return RedirectToAction("PlayerInterestEvents", "Events");
+                }
             }
             catch (Exception)
             {
@@ -151,6 +153,7 @@ namespace PickUpSports.Controllers
                 string timeofevent = GetTimeFormat(eventone.TimeOfEvent);
                 eventone.TimeOfEvent = timeofevent;
                 eventone.DateOfEvent = dateofevent;
+                eventone.CurrentPlayers = 1;
                 db.Event.Add(eventone);
                 PhoneNumbers.PlayersPhoneNumbers = db.Player.Include(p => p.ApplicationUser).Where(p => p.SportsInterest == eventone.SportsName && p.PlayerId != eventone.PlayerId).Select(p => p.PhoneNumber).ToList();
                 db.SaveChanges();
@@ -160,13 +163,13 @@ namespace PickUpSports.Controllers
                 playerEvent.EventId = eventid;
                 db.PlayerEvent.Add(playerEvent);
                 db.SaveChanges();
+
                 SMS.SendSMSToPlayers();
 
-                return RedirectToAction("Details","Players");
+                return RedirectToAction("PlayerInterestEvents", "Events");
             }
             catch
             {
-                Redirect("https://localhost:44357/sms/sendsms");
                 return RedirectToAction("Details", "Players");
             }
         }
@@ -234,6 +237,21 @@ namespace PickUpSports.Controllers
             }
         }
 
+        
+
+        public void DeleteOldEvents()
+        {
+            string yesterday = DateTime.Today.AddDays(-1).ToString("MM/dd/yyyy");
+            var oldevents = db.Event.Include(e => e.Player).Where(e => e.DateOfEvent == yesterday).ToList();
+
+            foreach (var item in oldevents)
+            {
+                item.PlayerId = 0;
+                db.Event.Remove(item);
+            }
+            db.SaveChanges();
+        }
+
         public string GetAppId()
         {
             var userid = User.Identity.GetUserId();
@@ -245,22 +263,63 @@ namespace PickUpSports.Controllers
             var player = db.Player.Include(s => s.ApplicationUser).Where(p => p.ApplicationId == userid).FirstOrDefault();
             return player;
         }
-        public Event GetEventById(int id) 
+        public Event GetEventById(int id)
         {
-            var eventnow = db.Event.Include(e => e.Player).Include(e=>e.Player.ApplicationUser).FirstOrDefault(e => e.EventId == id);
+            var eventnow = db.Event.Include(e => e.Player).Include(e => e.Player.ApplicationUser).FirstOrDefault(e => e.EventId == id);
             return eventnow;
         }
-        public string GetDateFormat(string date) 
+        public string GetDateFormat(string date)
         {
             DateTime dateformat = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             string dateofevent = dateformat.ToString("MM/dd/yyyy");
             return dateofevent;
         }
-        public string GetTimeFormat(string time) 
-        {           
+        public string GetTimeFormat(string time)
+        {
             DateTime timeformat = DateTime.ParseExact(time, "HH:mm", CultureInfo.InvariantCulture);
             string timeofevent = timeformat.ToString("h:mm tt");
             return timeofevent;
+        }
+
+
+        public async System.Threading.Tasks.Task<ActionResult> PlayerInterestEvents()
+        {
+            ViewBag.Apikey = "https://maps.googleapis.com/maps/api/js?key=" + GoogleMapsKey.Key + "&callback=initializeMap";
+            try
+            {
+                string datenow = System.DateTime.Now.ToString("MM/dd/yyyy");
+                var userid = GetAppId();
+                var player = GetPlayerByAppId(userid);
+                //var events = db.Event.Include(e => e.Player).Include(e => e.Player.ApplicationUser).Where(e => e.SportsName == player.SportsInterest && e.ZipCode == player.ZipCode && e.SkillLevel <= player.SkillLevel && e.DateOfEvent == datenow).ToList();
+                var eventsnow = db.PlayerEvent.Include(e => e.Event).Include(e => e.Player).Include(e => e.Player.ApplicationUser).Where(e => e.PlayerId != player.PlayerId).Select(e => e.Event).Where(e => e.SportsName == player.SportsInterest && e.ZipCode == player.ZipCode && e.SkillLevel == player.SkillLevel && e.DateOfEvent == datenow && e.IsFull == false && e.PlayerId != player.PlayerId).Include(e => e.Player).Include(e => e.Player.ApplicationUser).ToList();
+                foreach (var item in eventsnow)
+                {
+                    var splitAddress = item.StreetAddress.Split(new[] { ' ' }, 4);
+                    var address = splitAddress[0] + "+" + splitAddress[1] + "+" + splitAddress[2] + "+" + splitAddress[3] + ",+" + item.City + ",+" + item.State;
+                    string url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=" + GoogleMapsKey.Key;
+                    HttpClient client = new HttpClient();
+                    HttpResponseMessage response = await client.GetAsync(url);
+                    string jsonResult = await response.Content.ReadAsStringAsync();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        PlacesJSONResult postManJSON = JsonConvert.DeserializeObject<PlacesJSONResult>(jsonResult);
+                        item.Latitude = postManJSON.results[0].geometry.location.lat;
+                        item.Longitude = postManJSON.results[0].geometry.location.lng;
+                        
+                    }
+                }
+                
+                db.SaveChanges();
+                if (eventsnow == null || eventsnow.Count == 0)
+                {
+                    return RedirectToAction("Details", "Players");
+                }
+                return View(eventsnow);
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

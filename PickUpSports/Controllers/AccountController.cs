@@ -87,7 +87,7 @@ namespace PickUpSports.Controllers
                     }
                     else if (roles.Contains("Player"))
                     {
-                        return RedirectToAction("PlayerIntrestEvents", "Players");
+                        return RedirectToAction("RatePlayer", "Players");
                     }
                     else
                     {

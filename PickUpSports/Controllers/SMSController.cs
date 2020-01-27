@@ -25,44 +25,47 @@ namespace PickUpSports.Controllers
             db = new ApplicationDbContext();
         }
         
-        public ActionResult SendSMS()
-        {
-            var accountSid = TwilioAcct;
-            var authToken = TwilioToken;
-            TwilioClient.Init(accountSid, authToken);
+        //public ActionResult SendSMS()
+        //{
+        //    var accountSid = TwilioAcct;
+        //    var authToken = TwilioToken;
+        //    TwilioClient.Init(accountSid, authToken);
             
-            var to = new PhoneNumber("+19202542672");
-            var from = new PhoneNumber("+12562420890");
+        //    var to = new PhoneNumber("+19202542672");
+        //    var from = new PhoneNumber("+12562420890");
 
-            var message = MessageResource.Create(
-                to: to,
-                from: from,
-                body: "An event in your interest has been created. Open the app to view the event.");
-            return Content(message.Sid);
+        //    var message = MessageResource.Create(
+        //        to: to,
+        //        from: from,
+        //        body: "An event in your interest has been created. Open the app to view the event.");
+        //    return Content(message.Sid);
 
 
-        }
-        public void SendSMSToPlayers() 
+        //}
+        public ActionResult SendSMSToPlayers() 
         {
             var accountSid = TwilioAcct;
             var authToken = TwilioToken;
+            var notifyServiceSid = ServiceSidKey;
             TwilioClient.Init(accountSid, authToken);
 
             var phonenumbers = PhoneNumbers.PlayersPhoneNumbers;
+
+           
 
             foreach (var number in phonenumbers)
             {
                 var message = MessageResource.Create(
                     body: "An event in your interest has been created. Open the app to view the event.",
-                    from: new Twilio.Types.PhoneNumber("+12562420890"),
-                    to: new Twilio.Types.PhoneNumber(number)
+                    from: new PhoneNumber("+12562420890"),
+                    to: new PhoneNumber(number)
                 );
 
                 Console.WriteLine($"Message to {number} has been {message.Status}.");
-                Content(message.Sid);
+                
                 
             }
-            
+            return View("PlayerInterestEvents", "Events");
         }
     
         public ActionResult ReceiveSMS()
