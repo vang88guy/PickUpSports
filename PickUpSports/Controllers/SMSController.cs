@@ -24,24 +24,7 @@ namespace PickUpSports.Controllers
         {
             db = new ApplicationDbContext();
         }
-        
-        //public ActionResult SendSMS()
-        //{
-        //    var accountSid = TwilioAcct;
-        //    var authToken = TwilioToken;
-        //    TwilioClient.Init(accountSid, authToken);
-            
-        //    var to = new PhoneNumber("+19202542672");
-        //    var from = new PhoneNumber("+12562420890");
-
-        //    var message = MessageResource.Create(
-        //        to: to,
-        //        from: from,
-        //        body: "An event in your interest has been created. Open the app to view the event.");
-        //    return Content(message.Sid);
-
-
-        //}
+             
         public ActionResult SendSMSToPlayers() 
         {
             var accountSid = TwilioAcct;
