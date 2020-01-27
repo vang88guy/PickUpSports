@@ -37,24 +37,6 @@ namespace PickUpSports.Controllers
             return View(events);
         }
 
-        // Get Events that Player is interested in
-        //public ActionResult PlayerInterestEvents12()
-        //{
-        //    try
-        //    {
-        //        string datenow = System.DateTime.Now.ToString("MM/dd/yyyy");
-        //        var userid = GetAppId();
-        //        var player = GetPlayerByAppId(userid);
-        //        var events = db.Event.Include(e => e.Player).Include(e => e.Player.ApplicationUser).Where(e => e.SportsName == player.SportsInterest && e.ZipCode == player.ZipCode && e.SkillLevel == player.SkillLevel && e.DateOfEvent == datenow && e.IsFull == false && e.PlayerId != player.PlayerId).ToList();
-        //        var eventsnow = db.PlayerEvent.Include(e => e.Event).Include(e => e.Player).Include(e => e.Player.ApplicationUser).Where(e => e.PlayerId != player.PlayerId).Select(e => e.Event).Where(e => e.SportsName == player.SportsInterest && e.ZipCode == player.ZipCode && e.SkillLevel == player.SkillLevel && e.DateOfEvent == datenow && e.IsFull == false && e.PlayerId != player.PlayerId).Include(e => e.Player).Include(e => e.Player.ApplicationUser).ToList();
-        //        return View(eventsnow);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return View();
-        //    }
-        //}
-
         //Get Events that player created
 
         public ActionResult MyEvents()
@@ -237,21 +219,6 @@ namespace PickUpSports.Controllers
             }
         }
 
-        
-
-        public void DeleteOldEvents()
-        {
-            string yesterday = DateTime.Today.AddDays(-1).ToString("MM/dd/yyyy");
-            var oldevents = db.Event.Include(e => e.Player).Where(e => e.DateOfEvent == yesterday).ToList();
-
-            foreach (var item in oldevents)
-            {
-                item.PlayerId = 0;
-                db.Event.Remove(item);
-            }
-            db.SaveChanges();
-        }
-
         public string GetAppId()
         {
             var userid = User.Identity.GetUserId();
@@ -281,6 +248,7 @@ namespace PickUpSports.Controllers
             return timeofevent;
         }
 
+        // Get Events that Player is interested in
 
         public async System.Threading.Tasks.Task<ActionResult> PlayerInterestEvents()
         {
